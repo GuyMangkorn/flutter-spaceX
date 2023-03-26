@@ -1,0 +1,15 @@
+{
+  "title": "SpaceXL",
+  "upcoming": "Upcoming",
+  "hint_text": "Search...",
+  "rocket": "Rocket",
+  "crews": "Crews",
+  "launchpad": "Launchpad",
+  "filter": "Filter",
+  "by_name": "By name",
+  "a_z": "A-Z",
+  "z_a": "Z-A",
+  "by_launch_date": "By launch date",
+  "newer": "Newer",
+  "older": "Older"
+}
