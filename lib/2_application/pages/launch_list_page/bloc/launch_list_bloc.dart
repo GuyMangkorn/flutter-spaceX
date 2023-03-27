@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
 import 'package:space_x_demo/1_domain/entities/pagination_data_entity.dart';
+import 'package:space_x_demo/1_domain/failure/failures.dart';
 import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/model/filter_model.dart';
 
@@ -55,7 +56,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
     }, (failure) {
       emit(state.copyWith(
         status: () => LaunchListStatus.failure,
-        errorMessage: () => 'Somethings went wrong!',
+        errorMessage: () => mapFailureToMessage(failure),
       ));
     });
   }
@@ -99,7 +100,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
     }, (failure) {
       emit(state.copyWith(
         status: () => LaunchListStatus.failure,
-        errorMessage: () => 'Somethings went wrong!',
+        errorMessage: () => mapFailureToMessage(failure),
       ));
     });
   }
@@ -146,7 +147,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
     }, (failure) {
       emit(state.copyWith(
         status: () => LaunchListStatus.failure,
-        errorMessage: () => 'Somethings went wrong!',
+        errorMessage: () => mapFailureToMessage(failure),
       ));
     });
   }
@@ -190,7 +191,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
     }, (failure) {
       emit(state.copyWith(
         status: () => LaunchListStatus.failure,
-        errorMessage: () => 'Somethings went wrong!',
+        errorMessage: () => mapFailureToMessage(failure),
       ));
     });
   }

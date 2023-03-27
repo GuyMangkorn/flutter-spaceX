@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_x_demo/1_domain/entities/launch_detail_entity.dart';
+import 'package:space_x_demo/1_domain/failure/failures.dart';
 import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
 
 part 'launch_detail_event.dart';
@@ -45,7 +46,7 @@ class LaunchDetailBloc extends Bloc<LaunchDetailEvent, LaunchDetailState> {
         emit(
           state.copyWith(
             status: () => LaunchDetailStatus.failure,
-            errorMessage: () => 'Somethings went wrong!',
+            errorMessage: () => mapFailureToMessage(failure),
           ),
         );
       },

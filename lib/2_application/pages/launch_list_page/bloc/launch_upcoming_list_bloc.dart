@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
+import 'package:space_x_demo/1_domain/failure/failures.dart';
 import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
 
 part 'launch_upcoming_list_event.dart';
@@ -40,7 +41,7 @@ class LaunchUpcomingListBloc
     }, (failure) {
       emit(state.copyWith(
         status: () => LaunchUpcomingListStatus.failure,
-        errorMessage: () => 'Somethings went wrong!',
+        errorMessage: () => mapFailureToMessage(failure),
       ));
     });
   }
