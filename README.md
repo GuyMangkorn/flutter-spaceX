@@ -1,4 +1,15 @@
-# space_x_demo
+# SpaceX demo
+Demo spaceX application.
+
+## ListView screen
+<img src="/resources/example_1.gif" style="height: 800px;"> 
+
+## Filter and Searching
+<img src="/resources/example_2.gif" style="height: 800px;"> 
+
+## Detail screen
+<img src="/resources/example_3.gif" style="height: 800px;"> 
+
 
 A new Flutter project.
 
