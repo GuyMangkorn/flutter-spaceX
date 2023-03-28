@@ -17,5 +17,5 @@ class CrewEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, agency, image, wikipedia, status];
+  List<Object?> get props => [id, name, agency, image, wikipedia, status];
 }
