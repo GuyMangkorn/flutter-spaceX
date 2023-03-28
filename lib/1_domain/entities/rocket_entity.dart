@@ -19,5 +19,13 @@ class RocketEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        id,
+        name,
+        images,
+        successRatePct,
+        country,
+        company,
+        description,
+      ];
 }

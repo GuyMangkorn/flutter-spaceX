@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
+import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/top_list_section.dart';
+
+const mockLength = 4;
+
+void main() {
+  final mockData = List.generate(
+    mockLength,
+    (index) => LaunchEntity(
+      dateUtc: 'dateUtc',
+      id: 'id$index',
+      name: 'name$index',
+      success: true,
+      upcoming: false,
+      images: const [],
+      patch: '',
+    ),
+  );
+  Widget widgetUnderTest({required List<LaunchEntity> listData}) {
+    return MaterialApp(
+      home: TopListSection(listData: listData),
+    );
+  }
+
+  group('should be displayed correctly', () {
+    group('should be displayed', () {
+      testWidgets('child correctly when a list given', (widgetTester) async {
+        await widgetTester.pumpWidget(widgetUnderTest(
+          listData: mockData,
+        ));
+        await widgetTester.pumpAndSettle();
+
+        expect(find.text('name0'), findsOneWidget);
+        expect(find.text('name3'), findsNothing);
+      });
+    });
+
+    testWidgets('length correctly when a list given', (widgetTester) async {
+      await widgetTester.pumpWidget(widgetUnderTest(
+        listData: mockData,
+      ));
+      await widgetTester.pumpAndSettle();
+
+      final listWidget = widgetTester
+          .widget<TopListSection>(find.byType(TopListSection))
+          .listData;
+
+      expect(listWidget.length, mockLength);
+    });
+  });
+}

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:space_x_demo/0_data/datasources/launch_remote_datasource.dart';
+import 'package:space_x_demo/0_data/exceptions/exceptions.dart';
 import 'package:space_x_demo/0_data/models/crew_model.dart';
 import 'package:space_x_demo/0_data/models/launch_detail_model.dart';
 import 'package:space_x_demo/0_data/models/launch_model.dart';
@@ -20,7 +21,7 @@ class MockLaunchRemoteDataSource extends Mock
 void main() {
   final LaunchRemoteDataSource mockLaunchRemoteDataSource =
       MockLaunchRemoteDataSource();
-  final LaunchRepository mockLaunchRepositoryUnderTest =
+  final LaunchRepository launchRepositoryUnderTest =
       LaunchRepositoryImpl(launchRemoteDataSource: mockLaunchRemoteDataSource);
   group('LaunchRepository', () {
     test(
@@ -38,7 +39,7 @@ void main() {
       );
 
       final response =
-          await mockLaunchRepositoryUnderTest.fetchListLaunchQuery(payload);
+          await launchRepositoryUnderTest.fetchListLaunchQuery(payload);
 
       expect(response.isLeft(), true);
       expect(response.isRight(), false);
@@ -100,8 +101,8 @@ void main() {
         ),
       );
 
-      final response = await mockLaunchRepositoryUnderTest.fetchLaunchWithId(
-          payload: payload);
+      final response =
+          await launchRepositoryUnderTest.fetchLaunchWithId(payload: payload);
 
       expect(response.isLeft(), true);
       expect(response.isRight(), false);
@@ -149,11 +150,44 @@ void main() {
     });
 
     group('should return right with', () {
-      test('a ServerFailure when ServerException occurs', () async {});
+      const Map<String, dynamic> payload = {};
+      test('a ServerFailure when ServerException occurs', () async {
+        when(() => mockLaunchRemoteDataSource.fetchQueryAllLaunch(payload))
+            .thenThrow(ServerException());
 
-      test('a GeneralFailure when FetchDataException occurs', () async {});
+        final response =
+            await launchRepositoryUnderTest.fetchListLaunchQuery(payload);
 
-      test('a BadRequestFailure when BadRequestException occurs', () async {});
+        expect(response.isRight(), true);
+        expect(response.isLeft(), false);
+        expect(response, Right<LaunchResponseEntity, Failure>(ServerFailure()));
+      });
+
+      test('a GeneralFailure when FetchDataException occurs', () async {
+        when(() => mockLaunchRemoteDataSource.fetchQueryAllLaunch(payload))
+            .thenThrow(FetchDataException());
+
+        final response =
+            await launchRepositoryUnderTest.fetchListLaunchQuery(payload);
+
+        expect(response.isRight(), true);
+        expect(response.isLeft(), false);
+        expect(
+            response, Right<LaunchResponseEntity, Failure>(GeneralFailure()));
+      });
+
+      test('a BadRequestFailure when BadRequestException occurs', () async {
+        when(() => mockLaunchRemoteDataSource.fetchQueryAllLaunch(payload))
+            .thenThrow(BadRequestException());
+
+        final response =
+            await launchRepositoryUnderTest.fetchListLaunchQuery(payload);
+
+        expect(response.isRight(), true);
+        expect(response.isLeft(), false);
+        expect(response,
+            Right<LaunchResponseEntity, Failure>(BadRequestFailure()));
+      });
     });
   });
 }

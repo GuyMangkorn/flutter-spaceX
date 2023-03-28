@@ -19,5 +19,13 @@ class LaunchEntity extends Equatable {
       required this.patch});
 
   @override
-  List<Object?> get props => [id, name, dateUtc, success, upcoming];
+  List<Object?> get props => [
+        id,
+        name,
+        dateUtc,
+        success,
+        upcoming,
+        images,
+        patch,
+      ];
 }

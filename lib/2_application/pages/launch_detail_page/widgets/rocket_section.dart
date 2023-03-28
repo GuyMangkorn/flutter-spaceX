@@ -5,11 +5,7 @@ import 'package:space_x_demo/constants/constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
 class RocketSection extends StatelessWidget {
-  const RocketSection({
-    super.key,
-    required this.rocket,
-    required this.intl
-  });
+  const RocketSection({super.key, required this.rocket, required this.intl});
 
   final RocketEntity rocket;
   final S intl;

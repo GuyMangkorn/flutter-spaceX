@@ -1,0 +1,147 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:network_image_mock/network_image_mock.dart';
+import 'package:space_x_demo/1_domain/entities/laucnhpad_entity.dart';
+import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/launchpad_section.dart';
+import 'package:space_x_demo/generated/l10n.dart';
+
+import '../../../../constants_test.dart';
+
+void main() {
+  LaunchpadEntity createSubject({
+    String id = 'id',
+    String name = 'name',
+    String fullName = 'fullName',
+    String locality = 'locality',
+    String region = 'region',
+    int launchAttempts = 105,
+    int launchSuccesses = 105,
+    String details = 'details',
+    List<String> image = const [],
+  }) {
+    return LaunchpadEntity(
+      id: id,
+      name: name,
+      fullName: fullName,
+      locality: locality,
+      region: region,
+      launchAttempts: launchAttempts,
+      launchSuccesses: launchSuccesses,
+      details: details,
+      image: image,
+    );
+  }
+
+  Widget widgetUnderTest({required LaunchpadEntity launchpadEntity}) {
+    return MaterialApp(
+      home: LaunchpadSection(
+        launchpad: launchpadEntity,
+        intl: S(),
+      ),
+    );
+  }
+
+  group('LaunchpadSection', () {
+    late LaunchpadEntity mockLaunchpad;
+
+    setUp(() {
+      mockLaunchpad = createSubject();
+    });
+    testWidgets('displayed static header correctly', (widgetTester) async {
+      await widgetTester
+          .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad));
+      await widgetTester.pumpAndSettle();
+
+      expect(find.textContaining(S().launchpad), findsOneWidget);
+    });
+    group('should be displayed correctly', () {
+      testWidgets('when a Launchpad without image given', (widgetTester) async {
+        mockLaunchpad = createSubject(
+          name: 'name_test',
+          fullName: 'fullname_test',
+          details: 'details_test',
+        );
+        await widgetTester
+            .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad));
+        await widgetTester.pumpAndSettle();
+
+        expect(find.text('name_test'), findsOneWidget);
+        expect(find.text('fullname_test'), findsOneWidget);
+        expect(find.text('details_test'), findsOneWidget);
+
+        expect(find.byType(FadeInImage), findsNothing);
+      });
+
+      testWidgets('when a Launchpad with long text given',
+          (widgetTester) async {
+        const name =
+            'Elit et anim proident occaecat eiusmod incididunt sint.Enim irure id eiusmod occaecat enim Lorem.';
+        const fullName =
+            'Sunt et anim ullamco veniam ex irure dolore laboris nulla occaecat eiusmod consequat.Sint adipisicing sint enim fugiat eiusmod et.';
+        const details =
+            'Reprehenderit deserunt mollit labore sint sit duis magna aute.Ullamco est aliquip sit cillum dolore velit duis Lorem eu id do laborum sint voluptate.';
+        mockLaunchpad = createSubject(
+          name: name,
+          fullName: fullName,
+          details: details,
+        );
+        await widgetTester
+            .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad));
+        await widgetTester.pumpAndSettle();
+
+        expect(find.textContaining(name), findsOneWidget);
+        expect(find.textContaining(fullName), findsOneWidget);
+        expect(find.textContaining(details), findsOneWidget);
+
+        expect(find.byType(FadeInImage), findsNothing);
+      });
+
+      testWidgets('when a Launchpad with image empty list given',
+          (widgetTester) async {
+        mockLaunchpad = createSubject(image: []);
+        await widgetTester
+            .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad));
+        await widgetTester.pumpAndSettle();
+
+        final imageWidget = find.byWidgetPredicate(
+            (widget) => widget is Image && widget.image is AssetImage);
+
+        expect(
+          imageWidget,
+          findsNothing,
+        );
+      });
+
+      testWidgets('when a Launchpad with image empty String given',
+          (widgetTester) async {
+        mockLaunchpad = createSubject(image: ['']);
+        await widgetTester
+            .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad));
+        await widgetTester.pumpAndSettle();
+
+        final placeHolderWidget = find.byWidgetPredicate(
+            (widget) => widget is Image && widget.image is AssetImage);
+
+        // * check empty string show placeholder
+        expect(
+          placeHolderWidget,
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('when a Launchpad with a image given', (widgetTester) async {
+        mockLaunchpad = createSubject(image: [ConstantsTest.mockNetworkURL]);
+        await mockNetworkImagesFor(() async => await widgetTester
+            .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad)));
+        await widgetTester.pump(const Duration(milliseconds: 500));
+
+        final imageWidget = find.byWidgetPredicate(
+            (widget) => widget is Image && widget.image is NetworkImage);
+        expect(
+          imageWidget,
+          findsOneWidget,
+        );
+      });
+    });
+  });
+}

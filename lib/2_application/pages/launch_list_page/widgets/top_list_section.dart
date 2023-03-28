@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/top_list_tile.dart';
+import 'package:space_x_demo/2_application/routes/argument_model/launch_detail_argument.dart';
 import 'package:space_x_demo/constants/constants.dart';
 
 class TopListSection extends StatelessWidget {
@@ -25,13 +26,13 @@ class TopListSection extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed(
                 '/detail',
-                arguments: {
-                  "id": listData[index].id,
-                  "name": listData[index].name,
-                  "image": listData[index].images.isNotEmpty
+                arguments: LaunchDetailArgument(
+                  id: listData[index].id,
+                  name: listData[index].name,
+                  image: listData[index].images.isNotEmpty
                       ? listData[index].images[0]
-                      : ''
-                },
+                      : '',
+                ),
               );
             },
             id: listData[index].id,

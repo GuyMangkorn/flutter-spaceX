@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_list_tile.dart';
+import 'package:space_x_demo/2_application/routes/argument_model/launch_detail_argument.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:space_x_demo/generated/l10n.dart';
 
 class BottomListSection extends StatefulWidget {
   final List<LaunchEntity> listData;
-  final LaunchListStatus status;
 
   const BottomListSection({
     required this.listData,
-    required this.status,
     super.key,
   });
 
@@ -38,12 +38,14 @@ class _BottomListSectionState extends State<BottomListSection> {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
-      BlocProvider.of<LaunchListBloc>(context).add(LaunchListLoadMoreRequested());
+      BlocProvider.of<LaunchListBloc>(context)
+          .add(LaunchListLoadMoreRequested());
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final intl = S.of(context);
     final bottomPadding = MediaQuery.of(context).padding.bottom;
     return Expanded(
       child: ListView.separated(
@@ -56,20 +58,22 @@ class _BottomListSectionState extends State<BottomListSection> {
         ),
         itemBuilder: (context, index) {
           return BottomListTile(
+            intl: intl,
             id: widget.listData[index].id,
             name: widget.listData[index].name,
             date: widget.listData[index].dateUtc,
             images: widget.listData[index].images,
+            isSuccess: widget.listData[index].success,
             onTap: () {
               Navigator.of(context).pushNamed(
                 '/detail',
-                arguments: {
-                  "id": widget.listData[index].id,
-                  "name": widget.listData[index].name,
-                  "image": widget.listData[index].images.isNotEmpty
+                arguments: LaunchDetailArgument(
+                  id: widget.listData[index].id,
+                  name: widget.listData[index].name,
+                  image: widget.listData[index].images.isNotEmpty
                       ? widget.listData[index].images[0]
-                      : ''
-                },
+                      : '',
+                ),
               );
             },
           );

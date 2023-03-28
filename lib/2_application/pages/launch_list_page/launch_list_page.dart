@@ -1,10 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:space_x_demo/2_application/core/widgets/error_message.dart';
 import 'package:space_x_demo/2_application/core/widgets/main_app_bar.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_upcoming_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_list_section.dart';
+import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/circular_load_more.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/filter_section.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/skeleton_bottom_list.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/skeleton_top_list.dart';
@@ -59,12 +61,12 @@ class LaunchListPage extends StatelessWidget {
               child: FadeIn(
                 child: Column(
                   children: [
-                    TopHeaderSection(intl: intl),
+                    TopHeaderSection(title: intl.upcoming),
                     _buildTopListSection(),
-                    FilterSection(intl: intl),
+                    FilterSection(hintText: intl.hint_text),
                     _buildBottomListSection(),
                     const SizedBox(height: Constants.sm),
-                    _buildLoadingMoreCircular(),
+                    _buildLoadingMoreCircular(loadMoreText: intl.loading_more),
                     const SizedBox(height: Constants.md),
                   ],
                 ),
@@ -76,20 +78,15 @@ class LaunchListPage extends StatelessWidget {
     );
   }
 
-  BlocBuilder<LaunchListBloc, LaunchListState> _buildLoadingMoreCircular() {
+  BlocBuilder<LaunchListBloc, LaunchListState> _buildLoadingMoreCircular(
+      {required String loadMoreText}) {
     return BlocBuilder<LaunchListBloc, LaunchListState>(
       buildWhen: (previous, current) =>
           current.status == LaunchListStatus.refresh ||
           current.status == LaunchListStatus.success,
       builder: (context, state) {
         if (state.status == LaunchListStatus.refresh) {
-          return const RepaintBoundary(
-            child: SizedBox(
-              width: Constants.loadingMoreCircularSize,
-              height: Constants.loadingMoreCircularSize,
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return CircularLoadMore(loadMoreText: loadMoreText);
         } else {
           return const SizedBox();
         }
@@ -102,9 +99,9 @@ class LaunchListPage extends StatelessWidget {
       builder: (context, state) {
         if (state.status == LaunchListStatus.success ||
             state.status == LaunchListStatus.refresh) {
-          return BottomListSection(listData: state.list, status: state.status);
+          return BottomListSection(listData: state.list);
         } else if (state.status == LaunchListStatus.failure) {
-          return Text(state.errorMessage);
+          return ErrorMessage(message: state.errorMessage);
         } else {
           return const SkeletonBottomList();
         }
@@ -119,7 +116,7 @@ class LaunchListPage extends StatelessWidget {
         if (state.status == LaunchUpcomingListStatus.success) {
           return TopListSection(listData: state.list);
         } else if (state.status == LaunchUpcomingListStatus.failure) {
-          return Text(state.errorMessage);
+          return ErrorMessage(message: state.errorMessage);
         } else {
           return const SkeletonTopList();
         }

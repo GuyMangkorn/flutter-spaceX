@@ -27,12 +27,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("By launch date"),
         "by_name": MessageLookupByLibrary.simpleMessage("By name"),
         "crews": MessageLookupByLibrary.simpleMessage("Crews"),
+        "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "hint_text": MessageLookupByLibrary.simpleMessage("Search..."),
+        "launch_status":
+            MessageLookupByLibrary.simpleMessage("Launched status:"),
         "launchpad": MessageLookupByLibrary.simpleMessage("Launchpad"),
+        "loading_more": MessageLookupByLibrary.simpleMessage("Loading"),
         "newer": MessageLookupByLibrary.simpleMessage("Newer"),
         "older": MessageLookupByLibrary.simpleMessage("Older"),
         "rocket": MessageLookupByLibrary.simpleMessage("Rocket"),
+        "status_launched":
+            MessageLookupByLibrary.simpleMessage("Status: Launched"),
+        "success": MessageLookupByLibrary.simpleMessage("Success"),
         "title": MessageLookupByLibrary.simpleMessage("SpaceXL"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "z_a": MessageLookupByLibrary.simpleMessage("Z-A")

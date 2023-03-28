@@ -32,6 +32,7 @@ class LaunchpadEntity extends Equatable {
         region,
         launchAttempts,
         launchSuccesses,
-        details
+        details,
+        image
       ];
 }

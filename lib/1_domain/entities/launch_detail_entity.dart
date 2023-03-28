@@ -15,7 +15,7 @@ class LaunchDetailEntity extends Equatable {
   final List<CrewEntity> crew;
   final RocketEntity rocket;
   final LaunchpadEntity launchpad;
-  
+
   const LaunchDetailEntity({
     required this.dateUtc,
     required this.id,
@@ -31,6 +31,17 @@ class LaunchDetailEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props =>
-      [id, name, dateUtc, success, upcoming, crew, rocket, launchpad];
+  List<Object?> get props => [
+        id,
+        name,
+        dateUtc,
+        success,
+        upcoming,
+        details,
+        article,
+        wikipedia,
+        crew,
+        rocket,
+        launchpad,
+      ];
 }

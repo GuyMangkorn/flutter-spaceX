@@ -1,15 +1,14 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:space_x_demo/constants/constants.dart';
-import 'package:space_x_demo/generated/l10n.dart';
 
 class TopHeaderSection extends StatelessWidget {
   const TopHeaderSection({
     super.key,
-    required this.intl,
+    required this.title,
   });
 
-  final S intl;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +23,27 @@ class TopHeaderSection extends StatelessWidget {
             size: Constants.lg,
           ),
           const SizedBox(width: Constants.xs),
-          Text(intl.upcoming),
-          RepaintBoundary(
-            child: AnimatedTextKit(
-              repeatForever: true,
-              animatedTexts: [
-                TyperAnimatedText(
-                  '...',
-                  speed: const Duration(
-                    milliseconds: 1500,
+          Flexible(
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.clip,
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Expanded(
+            child: RepaintBoundary(
+              child: AnimatedTextKit(
+                repeatForever: true,
+                animatedTexts: [
+                  TyperAnimatedText(
+                    '...',
+                    speed: const Duration(
+                      milliseconds: 1500,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

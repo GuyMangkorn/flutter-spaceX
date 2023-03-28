@@ -7,7 +7,7 @@ class LaunchListState extends Equatable {
   final List<LaunchEntity> list;
   final String errorMessage;
   final PaginationDataEntity paginationData;
-  final FilterModel filter;
+  final FilterEntity filter;
 
   const LaunchListState({
     this.status = LaunchListStatus.initial,
@@ -17,7 +17,7 @@ class LaunchListState extends Equatable {
       hasNextPage: false,
       page: 1,
     ),
-    this.filter = const FilterModel(),
+    this.filter = const FilterEntity(),
   });
 
   LaunchListState copyWith(
@@ -25,7 +25,7 @@ class LaunchListState extends Equatable {
       List<LaunchEntity> Function()? list,
       String Function()? errorMessage,
       PaginationDataEntity Function()? paginationData,
-      FilterModel Function()? filter}) {
+      FilterEntity Function()? filter}) {
     return LaunchListState(
       status: status != null ? status() : this.status,
       list: list != null ? list() : this.list,

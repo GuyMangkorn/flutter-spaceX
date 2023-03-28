@@ -179,6 +179,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Loading`
+  String get loading_more {
+    return Intl.message(
+      'Loading',
+      name: 'loading_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status: Launched`
+  String get status_launched {
+    return Intl.message(
+      'Status: Launched',
+      name: 'status_launched',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Launched status:`
+  String get launch_status {
+    return Intl.message(
+      'Launched status:',
+      name: 'launch_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message(
+      'Success',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failure`
+  String get failure {
+    return Intl.message(
+      'Failure',
+      name: 'failure',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

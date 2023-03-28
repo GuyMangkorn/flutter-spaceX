@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:space_x_demo/2_application/core/widgets/custom_card.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:space_x_demo/generated/l10n.dart';
 
 class BottomListTile extends StatelessWidget {
   final String name;
@@ -9,14 +10,17 @@ class BottomListTile extends StatelessWidget {
   final String id;
   final Function() onTap;
   final List<String> images;
-  const BottomListTile({
-    super.key,
-    required this.id,
-    required this.name,
-    required this.date,
-    required this.onTap,
-    required this.images,
-  });
+  final S intl;
+  final bool isSuccess;
+  const BottomListTile(
+      {super.key,
+      required this.id,
+      required this.name,
+      required this.date,
+      required this.onTap,
+      required this.images,
+      required this.intl,
+      required this.isSuccess});
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +56,9 @@ class BottomListTile extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(date),
-                          const Text('Status: Launched'),
-                          const Text('Launched status: Success'),
+                          Text(intl.status_launched),
+                          Text(
+                              '${intl.launch_status} ${isSuccess ? intl.success : intl.failure}'),
                         ],
                       ),
                     ),

@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:space_x_demo/1_domain/entities/filter_entity.dart';
 import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
 import 'package:space_x_demo/1_domain/entities/pagination_data_entity.dart';
 import 'package:space_x_demo/1_domain/failure/failures.dart';
 import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
-import 'package:space_x_demo/2_application/pages/launch_list_page/model/filter_model.dart';
 
 part 'launch_list_event.dart';
 part 'launch_list_state.dart';
 
-const int _limitPerPage = 20;
+const int limitPerPage = 20;
 
 class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
   final LaunchRepository launchRepository;
@@ -40,7 +40,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
     Map<String, dynamic> payload = {
       "query": {"upcoming": false},
       "options": {
-        "limit": _limitPerPage,
+        "limit": limitPerPage,
         "sort": sort,
       }
     };
@@ -81,7 +81,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
     Map<String, dynamic> payload = {
       "query": {"upcoming": false},
       "options": {
-        "limit": _limitPerPage,
+        "limit": limitPerPage,
         "page": newPage,
         "sort": sort,
       }
@@ -92,10 +92,9 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
 
     resultOrFailure.fold((listData) {
       // * concat new items to list
-      state.list.addAll(listData.list);
       emit(state.copyWith(
           status: () => LaunchListStatus.success,
-          list: () => state.list,
+          list: () => [...state.list, ...listData.list],
           paginationData: () => listData.paginationData!));
     }, (failure) {
       emit(state.copyWith(
@@ -111,7 +110,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
   ) async {
     emit(
       state.copyWith(
-        filter: () => FilterModel(
+        filter: () => FilterEntity(
           filterByDate: event.filterByDate,
           filterByName: event.filterByName,
           filterFlag: event.filterFlag,
@@ -131,7 +130,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
     Map<String, dynamic> payload = {
       "query": {"upcoming": false},
       "options": {
-        "limit": _limitPerPage,
+        "limit": limitPerPage,
         "sort": sort,
       }
     };
@@ -175,7 +174,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
         "upcoming": false,
       },
       "options": {
-        "limit": _limitPerPage,
+        "limit": limitPerPage,
         "sort": sort,
       }
     };

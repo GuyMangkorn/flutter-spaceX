@@ -11,5 +11,10 @@
   "z_a": "Z-A",
   "by_launch_date": "By launch date",
   "newer": "Newer",
-  "older": "Older"
+  "older": "Older",
+  "loading_more": "Loading",
+  "status_launched": "Status: Launched",
+  "launch_status": "Launched status:",
+  "success": "Success",
+  "failure": "Failure"
 }

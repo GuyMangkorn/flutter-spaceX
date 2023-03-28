@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class FilterModel extends Equatable {
-  const FilterModel({
+class FilterEntity extends Equatable {
+  const FilterEntity({
     this.filterByName = false,
     this.filterByDate = true,
     this.filterFlag = -1,
@@ -11,5 +11,9 @@ class FilterModel extends Equatable {
   final int filterFlag;
 
   @override
-  List<Object?> get props => [filterByName, filterByDate, filterFlag];
+  List<Object?> get props => [
+        filterByName,
+        filterByDate,
+        filterFlag,
+      ];
 }
