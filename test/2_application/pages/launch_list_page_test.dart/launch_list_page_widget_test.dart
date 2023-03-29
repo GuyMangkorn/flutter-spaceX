@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +12,7 @@ import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_li
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_upcoming_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/launch_list_page.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_list_section.dart';
+import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/circular_load_more.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/skeleton_bottom_list.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/skeleton_top_list.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/top_list_section.dart';
@@ -295,6 +298,42 @@ void main() {
 
         final topListWidget = find.byType(SkeletonTopList);
         expect(topListWidget, findsOneWidget);
+      });
+
+      testWidgets('loading bottom when bottom bloc emit refresh',
+          (widgetTester) async {
+        whenListen(
+          mockLaunchListBloc,
+          Stream.fromIterable([
+            const LaunchListState(
+              status: LaunchListStatus.refresh,
+              errorMessage: serverFailureMessage,
+            ),
+          ]),
+          initialState: const LaunchListState(status: LaunchListStatus.initial),
+        );
+        whenListen(
+          mockLaunchUpcomingListBloc,
+          Stream.fromIterable([
+            const LaunchUpcomingListState(
+              status: LaunchUpcomingListStatus.success,
+            ),
+          ]),
+          initialState: const LaunchUpcomingListState(
+            status: LaunchUpcomingListStatus.initial,
+          ),
+        );
+
+        await widgetTester.pumpWidget(widgetUnderTest(
+          bloc: mockLaunchListBloc,
+          upcomingBloc: mockLaunchUpcomingListBloc,
+        ));
+
+        // * Pump FadeIn in LaunchListScreen
+        await widgetTester.pump(const Duration(milliseconds: 500));
+
+        final loadMoreIndicator = find.byType(CircularLoadMore);
+        expect(loadMoreIndicator, findsOneWidget);
       });
     });
   });

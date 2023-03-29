@@ -101,6 +101,7 @@ class AppTheme {
       ProgressIndicatorThemeData(color: _progressIndicatorColor);
 
   static final ThemeData darkTheme = ThemeData(
+    indicatorColor: _darkAccentSecondary,
     scaffoldBackgroundColor: _darkPrimaryColor,
     cardColor: _darkAccentPrimary,
     appBarTheme: AppBarTheme(

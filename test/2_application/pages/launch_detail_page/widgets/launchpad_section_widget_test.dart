@@ -52,24 +52,33 @@ void main() {
           .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad));
       await widgetTester.pumpAndSettle();
 
-      expect(find.textContaining(S().launchpad), findsOneWidget);
+      final headerWidget = find.textContaining(S().launchpad);
+
+      expect(headerWidget, findsOneWidget);
     });
     group('should be displayed correctly', () {
       testWidgets('when a Launchpad without image given', (widgetTester) async {
+        const name = 'name_test';
+        const fullName = 'fullname_test';
+        const details = 'details_test';
         mockLaunchpad = createSubject(
-          name: 'name_test',
-          fullName: 'fullname_test',
-          details: 'details_test',
+          name: name,
+          fullName: fullName,
+          details: details,
         );
         await widgetTester
             .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad));
         await widgetTester.pumpAndSettle();
 
-        expect(find.text('name_test'), findsOneWidget);
-        expect(find.text('fullname_test'), findsOneWidget);
-        expect(find.text('details_test'), findsOneWidget);
+        final nameWidget = find.text(name);
+        final fullNameWidget = find.text(fullName);
+        final detailWidget = find.text(details);
+        final imageWidget = find.byType(FadeInImage);
 
-        expect(find.byType(FadeInImage), findsNothing);
+        expect(nameWidget, findsOneWidget);
+        expect(fullNameWidget, findsOneWidget);
+        expect(detailWidget, findsOneWidget);
+        expect(imageWidget, findsNothing);
       });
 
       testWidgets('when a Launchpad with long text given',
@@ -89,11 +98,15 @@ void main() {
             .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad));
         await widgetTester.pumpAndSettle();
 
-        expect(find.textContaining(name), findsOneWidget);
-        expect(find.textContaining(fullName), findsOneWidget);
-        expect(find.textContaining(details), findsOneWidget);
+        final nameWidget = find.textContaining(name);
+        final fullNameWidget = find.textContaining(fullName);
+        final detailWidget = find.textContaining(details);
+        final imageWidget = find.byType(FadeInImage);
 
-        expect(find.byType(FadeInImage), findsNothing);
+        expect(nameWidget, findsOneWidget);
+        expect(fullNameWidget, findsOneWidget);
+        expect(detailWidget, findsOneWidget);
+        expect(imageWidget, findsNothing);
       });
 
       testWidgets('when a Launchpad with image empty list given',
@@ -106,10 +119,7 @@ void main() {
         final imageWidget = find.byWidgetPredicate(
             (widget) => widget is Image && widget.image is AssetImage);
 
-        expect(
-          imageWidget,
-          findsNothing,
-        );
+        expect(imageWidget, findsNothing);
       });
 
       testWidgets('when a Launchpad with image empty String given',
@@ -123,10 +133,7 @@ void main() {
             (widget) => widget is Image && widget.image is AssetImage);
 
         // * check empty string show placeholder
-        expect(
-          placeHolderWidget,
-          findsOneWidget,
-        );
+        expect(placeHolderWidget, findsOneWidget);
       });
 
       testWidgets('when a Launchpad with a image given', (widgetTester) async {
@@ -137,10 +144,7 @@ void main() {
 
         final imageWidget = find.byWidgetPredicate(
             (widget) => widget is Image && widget.image is NetworkImage);
-        expect(
-          imageWidget,
-          findsOneWidget,
-        );
+        expect(imageWidget, findsOneWidget);
       });
     });
   });

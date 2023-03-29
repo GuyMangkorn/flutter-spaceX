@@ -96,10 +96,10 @@ void main() {
         ));
         await widgetTester.pump();
 
-        expect(
-            find.byWidgetPredicate(
-                (widget) => widget is Image && widget.image is AssetImage),
-            findsOneWidget);
+        final placeHolderImage = find.byWidgetPredicate(
+            (widget) => widget is Image && widget.image is AssetImage);
+
+        expect(placeHolderImage, findsOneWidget);
       });
 
       testWidgets('a first index image when given a list of image',
@@ -117,12 +117,12 @@ void main() {
 
         await widgetTester.pump(const Duration(milliseconds: 500));
 
-        expect(
-            find.byWidgetPredicate((widget) =>
-                widget is Image &&
-                widget.image is NetworkImage &&
-                widget.width! > 0.0),
-            findsOneWidget);
+        final networkImage = find.byWidgetPredicate((widget) =>
+            widget is Image &&
+            widget.image is NetworkImage &&
+            widget.width! > 0.0);
+
+        expect(networkImage, findsOneWidget);
       });
     });
 

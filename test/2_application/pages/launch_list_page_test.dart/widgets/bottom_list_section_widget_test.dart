@@ -49,8 +49,11 @@ void main() {
         ));
         await widgetTester.pumpAndSettle();
 
-        expect(find.text('name0'), findsOneWidget);
-        expect(find.text('name1'), findsOneWidget);
+        final item1 = find.text('name0');
+        final item2 = find.text('name1');
+
+        expect(item1, findsOneWidget);
+        expect(item2, findsOneWidget);
       });
 
       testWidgets('length correctly when a list given', (widgetTester) async {

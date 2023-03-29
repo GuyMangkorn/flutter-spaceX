@@ -25,12 +25,15 @@ void main() {
         await widgetTester.pumpWidget(widgetUnderTest(loadMoreText: text));
         await widgetTester.pump(const Duration(milliseconds: 500));
 
-        expect(
-            widgetTester
-                .widget<CircularLoadMore>(find.byType(CircularLoadMore))
-                .loadMoreText,
-            text);
-        expect(find.textContaining(text), findsOneWidget);
+        final loadMoreTextParams = widgetTester
+            .widget<CircularLoadMore>(find.byType(CircularLoadMore))
+            .loadMoreText;
+        final textWidget = find.textContaining(text);
+        final circularWidget = find.byType(CircularProgressIndicator);
+
+        expect(loadMoreTextParams, text);
+        expect(textWidget, findsOneWidget);
+        expect(circularWidget, findsOneWidget);
       });
     });
   });

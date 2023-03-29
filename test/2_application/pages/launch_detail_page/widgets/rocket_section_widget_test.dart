@@ -45,7 +45,9 @@ void main() {
       await widgetTester.pumpWidget(widgetUnderTest(rocket: mockRocket));
       await widgetTester.pumpAndSettle();
 
-      expect(find.text(S().rocket), findsOneWidget);
+      final headerWidget = find.text(S().rocket);
+
+      expect(headerWidget, findsOneWidget);
     });
 
     group('should be display correctly', () {

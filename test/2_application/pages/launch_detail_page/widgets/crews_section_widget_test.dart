@@ -86,7 +86,7 @@ void main() {
 
         expect(
           imageWidget,
-          findsOneWidget,
+          findsOneWidget
         );
       });
     });

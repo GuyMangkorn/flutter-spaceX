@@ -48,11 +48,18 @@ class LaunchListPage extends StatelessWidget {
       ),
       body: LayoutBuilder(builder: (context, constraints) {
         return RefreshIndicator(
+          color: Theme.of(context).indicatorColor,
           onRefresh: () async {
             context.read<LaunchListBloc>().add(LaunchListRequested());
             context
                 .read<LaunchUpcomingListBloc>()
                 .add(LaunchUpcomingListRequested());
+            final response = await Future.wait([
+              context.read<LaunchUpcomingListBloc>().stream.first,
+              context.read<LaunchListBloc>().stream.first,
+            ]);
+
+            print(response.toString());
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),

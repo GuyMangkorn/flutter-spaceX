@@ -32,8 +32,11 @@ void main() {
         ));
         await widgetTester.pumpAndSettle();
 
-        expect(find.text('name0'), findsOneWidget);
-        expect(find.text('name3'), findsNothing);
+        final item1 = find.text('name0');
+        final item2 = find.text('name3');
+
+        expect(item1, findsOneWidget);
+        expect(item2, findsNothing);
       });
     });
 
