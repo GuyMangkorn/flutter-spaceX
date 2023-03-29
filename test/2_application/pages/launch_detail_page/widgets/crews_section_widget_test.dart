@@ -5,7 +5,7 @@ import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/crews_section.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
-import '../../../../constants_test.dart';
+import '../../../../../test_constant/test_constants.dart';
 
 const mockLength = 10;
 void main() {

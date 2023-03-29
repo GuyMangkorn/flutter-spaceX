@@ -23,9 +23,9 @@ class ErrorMessage extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.warning_amber_rounded,
-                    color: Colors.red,
+                    color: Theme.of(context).colorScheme.error,
                     size: Constants.xlg,
                   ),
                   const SizedBox(width: Constants.sm),

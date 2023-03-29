@@ -54,12 +54,6 @@ class LaunchListPage extends StatelessWidget {
             context
                 .read<LaunchUpcomingListBloc>()
                 .add(LaunchUpcomingListRequested());
-            final response = await Future.wait([
-              context.read<LaunchUpcomingListBloc>().stream.first,
-              context.read<LaunchListBloc>().stream.first,
-            ]);
-
-            print(response.toString());
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),

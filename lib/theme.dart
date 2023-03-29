@@ -16,6 +16,8 @@ class AppTheme {
   static const Color _darkAccentSecondary = Color(0x50409AFF);
   static const Color _darkAccentLight = Color(0x954EC2FF);
 
+  static const Color _errorColor = Colors.red;
+
   static const Color _iconColor = Colors.white;
 
   static const Color _accentColor = Color.fromRGBO(74, 217, 217, 1);
@@ -116,6 +118,7 @@ class AppTheme {
       secondary: _accentColor,
       onPrimary: _darkOnPrimaryColor,
       primaryContainer: _darkPrimaryVariantColor,
+      error: _errorColor,
     ),
     textTheme: _darkTextTheme,
     toggleButtonsTheme: ToggleButtonsThemeData(

@@ -37,7 +37,7 @@ class LaunchRemoteDataSourceImpl implements LaunchRemoteDataSource {
       Map<String, dynamic> payload) async {
     final parseBody = json.encode(payload);
     final response = await client.post(
-      Uri.parse('https://api.spacexdata.com/v4/launches/query'),
+      Uri.parse('https://api.spcexdata.com/v4/launches/query'),
       headers: {'Content-Type': 'application/json'},
       body: parseBody,
     );

@@ -6,7 +6,7 @@ import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/rocket_section.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
-import '../../../../constants_test.dart';
+import '../../../../../test_constant/test_constants.dart';
 
 void main() {
   late RocketEntity mockRocket;
