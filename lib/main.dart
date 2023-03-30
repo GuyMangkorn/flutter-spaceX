@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,8 +10,17 @@ import 'package:space_x_demo/injection.dart' as di;
 
 final router = AppRouter();
 
+ class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global=  MyHttpOverrides();
   await di.init();
   // await dotenv.load(fileName: '.env');
   runApp(const MyApp());
