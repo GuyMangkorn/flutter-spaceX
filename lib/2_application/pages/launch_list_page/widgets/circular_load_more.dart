@@ -19,9 +19,13 @@ class CircularLoadMore extends StatelessWidget {
           ),
         ),
         const SizedBox(width: Constants.md),
-        Text(
-          loadMoreText,
-          style: Theme.of(context).textTheme.titleLarge,
+        Flexible(
+          child: Text(
+            loadMoreText,
+            style: Theme.of(context).textTheme.titleLarge,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         )
       ],
     );

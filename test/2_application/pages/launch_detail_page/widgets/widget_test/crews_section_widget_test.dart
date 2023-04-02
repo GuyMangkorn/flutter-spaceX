@@ -5,22 +5,10 @@ import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/crews_section.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
-import '../../../../../test_constant/test_constants.dart';
+import '../../../../../../test_utils/test_utils.dart';
 
 const mockLength = 10;
 void main() {
-  final mockCrews = List.generate(
-    mockLength,
-    (index) => CrewEntity(
-      id: 'id',
-      name: 'name$index',
-      agency: 'agency',
-      image: ConstantsTest.mockNetworkURL,
-      wikipedia: 'wikipedia',
-      status: 'status',
-    ),
-  );
-
   Widget widgetUnderTest({required List<CrewEntity> crews}) {
     return MaterialApp(
       home: CrewsSection(crews: crews, intl: S()),
@@ -31,8 +19,8 @@ void main() {
     group('should be display correctly', () {
       testWidgets('when a list of crew and image was given',
           (widgetTester) async {
-        await mockNetworkImagesFor(() async =>
-            await widgetTester.pumpWidget(widgetUnderTest(crews: mockCrews)));
+        await mockNetworkImagesFor(() async => await widgetTester.pumpWidget(
+            widgetUnderTest(crews: ConstantsTest.mockNetworkImageCrews)));
         await widgetTester.pump(const Duration(milliseconds: 500));
 
         final item1 = find.text('name0');
@@ -84,10 +72,7 @@ void main() {
         final imageWidget = find.byWidgetPredicate(
             (widget) => widget is Image && widget.image is AssetImage);
 
-        expect(
-          imageWidget,
-          findsOneWidget
-        );
+        expect(imageWidget, findsOneWidget);
       });
     });
   });

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 
-import '../../../../test_constant/test_constants.dart';
+import '../../../../../test_utils/test_utils.dart';
 
 void main() {
   Widget widgetUnderTest({

@@ -44,8 +44,9 @@ class TopListItem extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: Constants.md),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
+                        Flexible(
                           child: Text(
                             name,
                             style: Theme.of(context).textTheme.labelLarge,
@@ -53,10 +54,15 @@ class TopListItem extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Text(
-                          date,
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
+                        Flexible(
+                          child: Text(
+                            date,
+                            style: Theme.of(context).textTheme.labelSmall,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.right,
+                          ),
+                        )
                       ],
                     ),
                   ),
