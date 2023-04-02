@@ -35,8 +35,24 @@ void main() {
             ),
           ])
           ..addScenario(
-            widget: widgetUnderTest(message: 'error_message'),
+            widget: widgetUnderTest(
+              message: 'error_message',
+            ),
             name: 'normal text',
+            onCreate: (scenarioWidgetKey) async {
+              final findText = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.text('error_message'),
+              );
+
+              final iconWidget = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.byIcon(Icons.warning_amber_rounded),
+              );
+
+              expect(findText, findsOneWidget);
+              expect(iconWidget, findsOneWidget);
+            },
           )
           ..addScenario(
             widget: widgetUnderTest(
@@ -44,10 +60,39 @@ void main() {
                   'Culpa veniam eiusmod anim esse adipisicing minim esse deserunt reprehenderit cupidatat deserunt.Laboris qui magna elit occaecat.',
             ),
             name: 'long message',
+            onCreate: (scenarioWidgetKey) async {
+              final findText = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.textContaining(
+                    'Culpa veniam eiusmod anim esse adipisicing minim esse deserunt reprehenderit cupidatat deserunt.Laboris qui magna elit occaecat.'),
+              );
+
+              final iconWidget = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.byIcon(Icons.warning_amber_rounded),
+              );
+
+              expect(findText, findsOneWidget);
+              expect(iconWidget, findsOneWidget);
+            },
           )
           ..addScenario(
             widget: widgetUnderTest(message: ''),
             name: 'no message',
+            onCreate: (scenarioWidgetKey) async {
+              final findText = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.text('error_message'),
+              );
+
+              final iconWidget = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.byIcon(Icons.warning_amber_rounded),
+              );
+
+              expect(findText, findsNothing);
+              expect(iconWidget, findsOneWidget);
+            },
           );
 
         await pumpDeviceBuilderWithThemeWrapper(
@@ -57,34 +102,3 @@ void main() {
     );
   });
 }
-
-
-
-
-// * alchemist package
-
-// goldenTest(
-//   'should be displayed correctly',
-//   fileName: 'error_message',
-//   builder: () => GoldenTestGroup(
-//     scenarioConstraints:
-//         const BoxConstraints(maxWidth: ConstantsTest.maxWidth),
-//     children: [
-//       GoldenTestScenario(
-//         name: 'normal message',
-//         child: const ErrorMessage(message: 'error_message'),
-//       ),
-//       GoldenTestScenario(
-//         name: 'long message',
-//         child: const ErrorMessage(
-//           message:
-//               'Culpa veniam eiusmod anim esse adipisicing minim esse deserunt reprehenderit cupidatat deserunt.Laboris qui magna elit occaecat.',
-//         ),
-//       ),
-//       GoldenTestScenario(
-//         name: 'no message',
-//         child: const ErrorMessage(message: ''),
-//       ),
-//     ],
-//   ),
-// );

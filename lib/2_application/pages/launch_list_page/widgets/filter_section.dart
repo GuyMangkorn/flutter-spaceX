@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_sheet_filter.dart';
 import 'package:space_x_demo/constants/constants.dart';
-import 'package:space_x_demo/generated/l10n.dart';
 
 class FilterSection extends StatefulWidget {
   const FilterSection({

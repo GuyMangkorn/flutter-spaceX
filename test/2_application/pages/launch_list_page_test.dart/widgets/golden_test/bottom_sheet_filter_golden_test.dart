@@ -7,6 +7,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:space_x_demo/1_domain/entities/filter_entity.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_sheet_filter.dart';
+import 'package:space_x_demo/generated/l10n.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
@@ -52,7 +53,38 @@ void main() {
             );
             return widgetUnderTest(bloc: mockBloc);
           }),
-          name: 'sorting A-Z',
+          name: 'sorting A-Z [true,false]',
+          onCreate: (scenarioWidgetKey) async {
+            final toggleButtons = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.byKey(const Key('t1')),
+            );
+
+            final labelName = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.text(S().by_name),
+            );
+
+            final toggleButtonDateIsSelected =
+                tester.widget<ToggleButtons>(toggleButtons).isSelected;
+
+            final headerIcon = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching:
+                  find.widgetWithIcon(BottomSheetFilter, Icons.filter_alt),
+            );
+
+            final headerLabel = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.text(S().filter),
+            );
+
+            expect(headerLabel, findsOneWidget);
+            expect(headerIcon, findsOneWidget);
+            expect(labelName, findsOneWidget);
+            expect(toggleButtons, findsOneWidget);
+            expect(toggleButtonDateIsSelected, [true, false]);
+          },
         )
         ..addScenario(
           widget: Builder(builder: (context) {
@@ -71,7 +103,25 @@ void main() {
             );
             return widgetUnderTest(bloc: mockBloc);
           }),
-          name: 'sorting Z-A',
+          name: 'sorting Z-A [false, true]',
+          onCreate: (scenarioWidgetKey) async {
+            final toggleButtons = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.byKey(const Key('t1')),
+            );
+
+            final labelName = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.text(S().by_name),
+            );
+
+            final toggleButtonDateIsSelected =
+                tester.widget<ToggleButtons>(toggleButtons).isSelected;
+
+            expect(labelName, findsOneWidget);
+            expect(toggleButtons, findsOneWidget);
+            expect(toggleButtonDateIsSelected, [false, true]);
+          },
         )
         ..addScenario(
           widget: Builder(builder: (context) {
@@ -90,7 +140,25 @@ void main() {
             );
             return widgetUnderTest(bloc: mockBloc);
           }),
-          name: 'sorting Newer',
+          name: 'sorting Newer [true ,false]',
+          onCreate: (scenarioWidgetKey) async {
+            final toggleButtons = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.byKey(const Key('t2')),
+            );
+
+            final toggleButtonDateIsSelected =
+                tester.widget<ToggleButtons>(toggleButtons).isSelected;
+
+            final labelName = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.text(S().by_launch_date),
+            );
+
+            expect(labelName, findsOneWidget);
+            expect(toggleButtons, findsOneWidget);
+            expect(toggleButtonDateIsSelected, [true, false]);
+          },
         )
         ..addScenario(
           widget: Builder(builder: (context) {
@@ -109,7 +177,25 @@ void main() {
             );
             return widgetUnderTest(bloc: mockBloc);
           }),
-          name: 'sorting Older',
+          name: 'sorting Older [false,true]',
+          onCreate: (scenarioWidgetKey) async {
+            final toggleButtons = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.byKey(const Key('t2')),
+            );
+
+            final toggleButtonDateIsSelected =
+                tester.widget<ToggleButtons>(toggleButtons).isSelected;
+
+            final labelName = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.text(S().by_launch_date),
+            );
+
+            expect(labelName, findsOneWidget);
+            expect(toggleButtons, findsOneWidget);
+            expect(toggleButtonDateIsSelected, [false, true]);
+          },
         );
 
       await pumpDeviceBuilderWithThemeWrapper(

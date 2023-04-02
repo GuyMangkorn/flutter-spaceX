@@ -15,16 +15,52 @@ void main() {
 
     testGoldens('should be displayed correctly', (tester) async {
       final builder = DeviceBuilder()
-        ..overrideDevicesForAllScenarios(
-            devices: [Device.iphone11, Device.tabletPortrait])
+        ..overrideDevicesForAllScenarios(devices: [
+          Device.iphone11,
+          Device.tabletPortrait,
+        ])
         ..addScenario(
-            widget: widgetUnderTest(title: 'Title'), name: 'normal text')
+          widget: widgetUnderTest(title: 'Title'),
+          name: 'normal text',
+          onCreate: (scenarioWidgetKey) async {
+            final textWidget = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.text('Title'),
+            );
+
+            final iconWidget = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching:
+                  find.widgetWithIcon(TopHeaderSection, Icons.rocket_sharp),
+            );
+
+            expect(iconWidget, findsOneWidget);
+            expect(textWidget, findsOneWidget);
+          },
+        )
         ..addScenario(
           widget: widgetUnderTest(
             title:
                 'Title Non eiusmod nostrud minim do magna dolor proident reprehenderit.In Lorem et excepteur minim elit sunt culpa anim',
           ),
           name: 'long text',
+          onCreate: (scenarioWidgetKey) async {
+            final textWidget = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.textContaining(
+                'Title Non eiusmod nostrud minim do magna dolor proident reprehenderit.In Lorem et excepteur minim elit sunt culpa anim',
+              ),
+            );
+
+            final iconWidget = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching:
+                  find.widgetWithIcon(TopHeaderSection, Icons.rocket_sharp),
+            );
+
+            expect(iconWidget, findsOneWidget);
+            expect(textWidget, findsOneWidget);
+          },
         );
 
       await pumpDeviceBuilderWithThemeWrapper(

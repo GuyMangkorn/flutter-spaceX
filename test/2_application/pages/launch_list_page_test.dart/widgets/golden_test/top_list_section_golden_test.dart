@@ -25,12 +25,32 @@ void main() {
               listData: ConstantsTest.mockListLaunch,
             ),
             name: 'with placeholder',
+            onCreate: (scenarioWidgetKey) async {
+              final placeholderImage = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.byWidgetPredicate(
+                  (widget) => widget is Image && widget.image is AssetImage,
+                ),
+              );
+
+              expect(placeholderImage, findsAtLeastNWidgets(1));
+            },
           )
           ..addScenario(
             widget: widgetUnderTest(
               listData: ConstantsTest.mockListLaunchNetworkImage,
             ),
             name: 'with network image',
+            onCreate: (scenarioWidgetKey) async {
+              final placeholderImage = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.byWidgetPredicate(
+                  (widget) => widget is Image && widget.image is NetworkImage,
+                ),
+              );
+
+              expect(placeholderImage, findsAtLeastNWidgets(1));
+            },
           );
 
         await pumpDeviceBuilderWithThemeWrapper(

@@ -18,7 +18,9 @@ void main() {
     );
   }
 
-  setUpAll(() async => await loadAppFonts());
+  final mockCrewScenario1 = ConstantsTest.mockCrews;
+  final mockCrewScenario2 = ConstantsTest.mockNetworkImageCrews;
+
   group('CrewSection golden', () {
     testGoldens(
       'should be displayed correctly',
@@ -33,18 +35,56 @@ void main() {
             )
             ..addScenario(
               widget: widgetUnderTest(
-                crews: ConstantsTest.mockCrews,
+                crews: mockCrewScenario1,
               ),
               name: 'have some list with placeholder in crew',
+              onCreate: (scenarioWidgetKey) async {
+                final placeholderWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate((widget) =>
+                      widget is Image && widget.image is AssetImage),
+                );
+                final titleWidgetIndex0 = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.text(mockCrewScenario1[0].name),
+                );
+
+                expect(titleWidgetIndex0, findsOneWidget);
+                expect(placeholderWidget, findsAtLeastNWidgets(1));
+              },
             )
             ..addScenario(
               widget: widgetUnderTest(
-                crews: ConstantsTest.mockNetworkImageCrews,
+                crews: mockCrewScenario2,
               ),
               name: 'have some list in crew',
+              onCreate: (scenarioWidgetKey) async {
+                final placeholderWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate((widget) =>
+                      widget is Image && widget.image is NetworkImage),
+                );
+                final titleWidgetIndex0 = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.text(mockCrewScenario2[0].name),
+                );
+                final exactImageUrl = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.widgetWithImage(
+                    CrewsSection,
+                    NetworkImage(mockCrewScenario2[0].image),
+                  ),
+                );
+
+                expect(exactImageUrl, findsOneWidget);
+                expect(titleWidgetIndex0, findsOneWidget);
+                expect(placeholderWidget, findsAtLeastNWidgets(1));
+              },
             );
           await pumpDeviceBuilderWithThemeWrapper(
-              tester: tester, deviceBuilder: builder);
+            tester: tester,
+            deviceBuilder: builder,
+          );
           await screenMatchesGolden(
             tester,
             'crews_section',

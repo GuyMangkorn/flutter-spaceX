@@ -7,16 +7,20 @@ import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import '../../../../../test_utils/test_utils.dart';
 
 void main() {
+  const double width = 400;
+  const double height = 200;
   Widget widgetUnderTest({
     required String image,
     double? width,
     double? height,
   }) {
     return Scaffold(
-      body: FadeLoadImage(
-        image: image,
-        width: width,
-        height: height,
+      body: SizedBox(
+        child: FadeLoadImage(
+          image: image,
+          width: width,
+          height: height,
+        ),
       ),
     );
   }
@@ -41,14 +45,58 @@ void main() {
             ..addScenario(
               widget: widgetUnderTest(image: ''),
               name: 'no image show placeholder',
+              onCreate: (scenarioWidgetKey) async {
+                final placeholderWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate(
+                    (widget) => widget is Image && widget.image is AssetImage,
+                  ),
+                );
+
+                expect(placeholderWidget, findsOneWidget);
+              },
             )
             ..addScenario(
-              widget: widgetUnderTest(
-                image: ConstantsTest.mockNetworkURL,
-              ),
+              widget: widgetUnderTest(image: ConstantsTest.mockNetworkURL),
               name: 'placeholder wasn\'t set width and height',
-            );
+              onCreate: (scenarioWidgetKey) async {
+                final networkImage = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate(
+                    (widget) => widget is Image && widget.image is NetworkImage,
+                  ),
+                );
 
+                final exactImageUrl = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.widgetWithImage(
+                    FadeLoadImage,
+                    const NetworkImage(ConstantsTest.mockNetworkURL),
+                  ),
+                );
+
+                expect(exactImageUrl, findsOneWidget);
+                expect(networkImage, findsOneWidget);
+              },
+            )
+            ..addScenario(
+              widget: widgetUnderTest(image: '', width: width, height: height),
+              name: 'placeholder with fixed size image',
+              onCreate: (scenarioWidgetKey) async {
+                final networkImage = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate(
+                    (widget) =>
+                        widget is Image &&
+                        widget.image is AssetImage &&
+                        widget.width == width &&
+                        widget.height == height,
+                  ),
+                );
+
+                expect(networkImage, findsOneWidget);
+              },
+            );
           await pumpDeviceBuilderWithThemeWrapper(
               tester: tester, deviceBuilder: builder);
           await screenMatchesGolden(

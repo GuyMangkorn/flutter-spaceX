@@ -18,6 +18,16 @@ void main() {
     );
   }
 
+  final mockScenario1 = createRocketEntity();
+  final mockScenario2 = createRocketEntity(images: ['', '', '']);
+  final mockScenario3 = createRocketEntity(images: [
+    ConstantsTest.mockNetworkURL,
+    ConstantsTest.mockNetworkURL,
+    ConstantsTest.mockNetworkURL
+  ]);
+  final mockScenario4 = createRocketEntity(
+      name:
+          'Tempor anim proident non ipsum nostrud in.Aliqua aliquip anim Lorem eiusmod ullamco.Ex cupidatat anim labore cupidatat cupidatat aliqua minim quis Lorem anim eu magna.');
   group('RocketSection golden', () {
     testGoldens(
       'should be displayed correctly',
@@ -28,25 +38,139 @@ void main() {
                 devices: [Device.iphone11, Device.tabletPortrait])
             ..addScenario(
               widget: widgetUnderTest(
-                rocket: createRocketEntity(),
+                rocket: mockScenario1,
               ),
               name: 'empty image',
+              onCreate: (scenarioWidgetKey) async {
+                final imageWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate((widget) => widget is Image),
+                );
+
+                final nameWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.textContaining(mockScenario1.name),
+                );
+
+                final companyWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.textContaining(mockScenario1.company),
+                );
+
+                final descriptionWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.text(mockScenario1.description),
+                );
+
+                expect(imageWidget, findsNothing);
+
+                expect(nameWidget, findsOneWidget);
+                expect(companyWidget, findsOneWidget);
+                expect(descriptionWidget, findsOneWidget);
+              },
             )
             ..addScenario(
               widget: widgetUnderTest(
-                rocket: createRocketEntity(images: ['', '', '']),
+                rocket: mockScenario2,
               ),
               name: 'list placeholder image',
+              onCreate: (scenarioWidgetKey) async {
+                final imageWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate((widget) =>
+                      widget is Image && widget.image is AssetImage),
+                );
+
+                final nameWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.textContaining(mockScenario2.name),
+                );
+
+                final companyWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.textContaining(mockScenario2.company),
+                );
+
+                final descriptionWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.text(mockScenario2.description),
+                );
+
+                expect(imageWidget, findsAtLeastNWidgets(1));
+                expect(nameWidget, findsOneWidget);
+                expect(companyWidget, findsOneWidget);
+                expect(descriptionWidget, findsOneWidget);
+              },
             )
             ..addScenario(
               widget: widgetUnderTest(
-                rocket: createRocketEntity(images: [
-                  ConstantsTest.mockNetworkURL,
-                  ConstantsTest.mockNetworkURL,
-                  ConstantsTest.mockNetworkURL
-                ]),
+                rocket: mockScenario3,
               ),
               name: 'list network image',
+              onCreate: (scenarioWidgetKey) async {
+                final imageWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate((widget) =>
+                      widget is Image && widget.image is NetworkImage),
+                );
+
+                final nameWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.textContaining(mockScenario3.name),
+                );
+
+                final companyWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.textContaining(mockScenario3.company),
+                );
+
+                final descriptionWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.text(mockScenario3.description),
+                );
+
+                final matchExactUrl = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.widgetWithImage(RocketSection,
+                      const NetworkImage(ConstantsTest.mockNetworkURL)),
+                );
+
+                expect(imageWidget, findsAtLeastNWidgets(1));
+                expect(matchExactUrl, findsOneWidget);
+                expect(nameWidget, findsOneWidget);
+                expect(companyWidget, findsOneWidget);
+                expect(descriptionWidget, findsOneWidget);
+              },
+            )
+            ..addScenario(
+              widget: widgetUnderTest(rocket: mockScenario4),
+              name: 'a long name was given',
+              onCreate: (scenarioWidgetKey) async {
+                final imageWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.byWidgetPredicate((widget) => widget is Image),
+                );
+                final nameWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.textContaining(mockScenario4.name),
+                );
+
+                final companyWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.textContaining(mockScenario4.company),
+                );
+
+                final descriptionWidget = find.descendant(
+                  of: find.byKey(scenarioWidgetKey),
+                  matching: find.text(mockScenario4.description),
+                );
+
+                expect(imageWidget, findsNothing);
+
+                expect(nameWidget, findsOneWidget);
+                expect(companyWidget, findsOneWidget);
+                expect(descriptionWidget, findsOneWidget);
+              },
             );
 
           await pumpDeviceBuilderWithThemeWrapper(

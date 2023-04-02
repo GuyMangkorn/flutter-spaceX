@@ -7,10 +7,9 @@ import 'package:space_x_demo/constants/constants.dart';
 import '../../../../../test_utils/test_utils.dart';
 
 void main() {
-  Widget widgetUnderTest({required Widget child, Key key = const Key('t1')}) {
+  Widget widgetUnderTest({required Widget child}) {
     return Scaffold(
       body: CustomCard(
-        key: key,
         child: child,
       ),
     );
@@ -37,6 +36,14 @@ void main() {
               child: const Center(child: Text('Title')),
             ),
             name: 'with text child',
+            onCreate: (scenarioWidgetKey) async {
+              final childWidget = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.text('Title'),
+              );
+
+              expect(childWidget, findsOneWidget);
+            },
           )
           ..addScenario(
             widget: Builder(builder: (context) {
@@ -52,6 +59,14 @@ void main() {
               );
             }),
             name: 'with image child',
+            onCreate: (scenarioWidgetKey) async {
+              final childWidget = find.descendant(
+                of: find.byKey(scenarioWidgetKey),
+                matching: find.byType(Image),
+              );
+
+              expect(childWidget, findsOneWidget);
+            },
           );
 
         await pumpDeviceBuilderWithThemeWrapper(

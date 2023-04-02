@@ -22,6 +22,20 @@ void main() {
             message: 'Loading...',
           ),
           name: 'normal text',
+          onCreate: (scenarioWidgetKey) async {
+            final circleLoading = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.byType(CircularProgressIndicator),
+            );
+
+            final loadMessage = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.text('Loading...'),
+            );
+
+            expect(circleLoading, findsOneWidget);
+            expect(loadMessage, findsOneWidget);
+          },
         )
         ..addScenario(
           widget: widgetUnderTest(
@@ -29,6 +43,21 @@ void main() {
                 'Loading Incididunt eiusmod consequat labore duis do culpa velit dolore est qui excepteur est....',
           ),
           name: 'long text',
+          onCreate: (scenarioWidgetKey) async {
+            final circleLoading = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.byType(CircularProgressIndicator),
+            );
+
+            final loadMessage = find.descendant(
+              of: find.byKey(scenarioWidgetKey),
+              matching: find.textContaining(
+                  'Loading Incididunt eiusmod consequat labore duis do culpa velit dolore est qui excepteur est....'),
+            );
+
+            expect(circleLoading, findsOneWidget);
+            expect(loadMessage, findsOneWidget);
+          },
         );
 
       await pumpDeviceBuilderWithThemeWrapper(
