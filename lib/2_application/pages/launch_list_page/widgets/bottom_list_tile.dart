@@ -3,6 +3,27 @@ import 'package:space_x_demo/2_application/core/widgets/custom_card.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import 'package:space_x_demo/constants/constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: BottomListTile)
+Widget bottomListTileUseCase(BuildContext context) {
+  final intl = S.of(context);
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      BottomListTile(
+        id: 'id',
+        name: context.knobs.text(label: 'Name', initialValue: 'name'),
+        date: context.knobs.text(label: 'Date', initialValue: '12-02-2022'),
+        onTap: () {},
+        images: const [],
+        intl: intl,
+        isSuccess: context.knobs.boolean(label: 'Success', initialValue: true),
+      ),
+    ],
+  );
+}
 
 class BottomListTile extends StatelessWidget {
   final String name;

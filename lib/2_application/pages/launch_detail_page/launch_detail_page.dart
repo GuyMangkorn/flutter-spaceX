@@ -14,6 +14,19 @@ import 'package:space_x_demo/2_application/routes/argument_model/launch_detail_a
 import 'package:space_x_demo/constants/constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 import 'package:space_x_demo/injection.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: LaunchDetailPage)
+Widget launchDetailPageUseCase(BuildContext context) {
+  return LaunchDetailPage(
+    args: LaunchDetailArgument(
+      id: '',
+      name: context.knobs.text(label: 'Name', initialValue: 'Name'),
+      image: '',
+    ),
+  );
+}
 
 class LaunchDetailPageWrapper extends StatelessWidget {
   final LaunchDetailArgument args;

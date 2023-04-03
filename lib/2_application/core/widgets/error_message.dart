@@ -2,6 +2,30 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:space_x_demo/constants/constants.dart';
 
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+import 'package:widgetbook/widgetbook.dart';
+
+@anno.WidgetbookUseCase(name: 'Default', type: ErrorMessage)
+Widget errorMessageUseCase(BuildContext context) {
+  return ErrorMessage(
+    message: context.knobs.text(
+      label: 'Message Label',
+      initialValue: 'Error Message',
+    ),
+  );
+}
+
+@anno.WidgetbookUseCase(name: 'Long message', type: ErrorMessage)
+Widget longErrorMessageUseCase(BuildContext context) {
+  return ErrorMessage(
+    message: context.knobs.text(
+      label: 'Message Label',
+      initialValue:
+          'Error Message Ex commodo labore consequat laboris fugiat dolor sint.Qui eu sint quis non sit Lorem adipisicing pariatur excepteur incididunt.',
+    ),
+  );
+}
+
 class ErrorMessage extends StatelessWidget {
   const ErrorMessage({super.key, required this.message});
 

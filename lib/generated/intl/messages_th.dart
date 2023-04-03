@@ -26,22 +26,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "by_launch_date":
             MessageLookupByLibrary.simpleMessage("By launch date"),
         "by_name": MessageLookupByLibrary.simpleMessage("By name"),
-        "crews": MessageLookupByLibrary.simpleMessage("Crews"),
+        "crews": MessageLookupByLibrary.simpleMessage("ลูกเรือ"),
         "failure": MessageLookupByLibrary.simpleMessage("Failure"),
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
-        "hint_text": MessageLookupByLibrary.simpleMessage("Search..."),
+        "hint_text": MessageLookupByLibrary.simpleMessage("ค้นหา..."),
         "launch_status":
             MessageLookupByLibrary.simpleMessage("Launched status:"),
         "launchpad": MessageLookupByLibrary.simpleMessage("Launchpad"),
         "loading_more": MessageLookupByLibrary.simpleMessage("Loading"),
         "newer": MessageLookupByLibrary.simpleMessage("Newer"),
         "older": MessageLookupByLibrary.simpleMessage("Older"),
-        "rocket": MessageLookupByLibrary.simpleMessage("Rocket"),
+        "rocket": MessageLookupByLibrary.simpleMessage("จรวด"),
         "status_launched":
             MessageLookupByLibrary.simpleMessage("Status: Launched"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
-        "title": MessageLookupByLibrary.simpleMessage("SpaceXL"),
-        "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
+        "title": MessageLookupByLibrary.simpleMessage("สเปซเอ็กซ์แอล"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("กำลังจะปล่อย"),
         "z_a": MessageLookupByLibrary.simpleMessage("Z-A")
       };
 }

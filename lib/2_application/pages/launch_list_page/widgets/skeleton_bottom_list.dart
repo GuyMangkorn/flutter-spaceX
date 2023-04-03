@@ -2,6 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:space_x_demo/2_application/core/widgets/custom_card.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: SkeletonBottomList)
+Widget skeletonBottomListUseCase(BuildContext context) {
+  return Column(
+    children: const [
+      SkeletonBottomList(),
+    ],
+  );
+}
 
 class SkeletonBottomList extends StatelessWidget {
   const SkeletonBottomList({super.key});

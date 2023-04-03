@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+import 'package:widgetbook/widgetbook.dart';
+
+@anno.WidgetbookUseCase(name: 'Default', type: MainAppBar)
+Widget mainAppBarUseCase(BuildContext context) {
+  return Scaffold(
+    appBar: MainAppBar(
+      title: context.knobs.text(
+        label: 'Title Label',
+        initialValue: 'Title',
+      ),
+    ),
+  );
+}
 
 class MainAppBar extends StatelessWidget with PreferredSizeWidget {
   const MainAppBar({

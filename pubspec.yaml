@@ -29,6 +29,9 @@ dependencies:
   skeletons: ^0.0.3
   transparent_image: ^2.0.1
   get_it: ^7.2.0
+  widgetbook_annotation: ^2.1.0
+  flutter_screenutil: ^5.7.0
+  widgetbook: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -41,7 +44,8 @@ dev_dependencies:
   bloc_test: ^9.1.1
   alchemist: ^0.6.0
   golden_toolkit: ^0.15.0
-  widgetbook: ^2.4.1
+  build_runner: ^2.3.3
+  widgetbook_generator: ^2.4.1
 
 flutter:
   uses-material-design: true

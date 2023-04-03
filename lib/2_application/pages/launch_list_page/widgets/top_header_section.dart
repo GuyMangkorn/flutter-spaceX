@@ -1,6 +1,15 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: TopHeaderSection)
+Widget topHeaderSectionUseCase(BuildContext context) {
+  return TopHeaderSection(
+    title: context.knobs.text(label: 'Header', initialValue: 'Header'),
+  );
+}
 
 class TopHeaderSection extends StatelessWidget {
   const TopHeaderSection({

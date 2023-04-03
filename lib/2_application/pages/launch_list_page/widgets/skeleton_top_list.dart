@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: SkeletonTopList)
+Widget skeletonTopListListUseCase(BuildContext context) {
+  return const SkeletonTopList();
+}
 
 class SkeletonTopList extends StatelessWidget {
   const SkeletonTopList({super.key});

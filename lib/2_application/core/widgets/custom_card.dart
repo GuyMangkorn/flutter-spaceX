@@ -1,6 +1,42 @@
 import 'package:flutter/material.dart';
-
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+import 'package:widgetbook/widgetbook.dart';
+
+@anno.WidgetbookUseCase(name: 'Default', type: CustomCard)
+Widget customCardUseCase(BuildContext context) {
+  return CustomCard(
+    width: context.knobs.slider(
+      label: 'Width',
+      max: 1000,
+      min: 150,
+      initialValue: 200,
+    ),
+    height: context.knobs.slider(
+      label: 'Height',
+      max: 1000,
+      min: 150,
+      initialValue: 200,
+    ),
+    child: Column(
+      children: [
+        Expanded(
+          child: Image.asset(
+            'assets/images/placeholder.jpeg',
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Text(
+          context.knobs.text(
+            label: 'Message Label',
+            initialValue: 'Some Message',
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
 class CustomCard extends StatelessWidget {
   final Widget? child;

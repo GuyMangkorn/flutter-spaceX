@@ -2,6 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:space_x_demo/2_application/core/widgets/custom_card.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: TopListItem)
+Widget topListItemUseCase(BuildContext context) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Center(
+        child: TopListItem(
+          id: 'id',
+          name: context.knobs.text(label: 'Name', initialValue: 'name'),
+          date: context.knobs.text(label: 'Date', initialValue: '12-02-2022'),
+          onTap: () {},
+          images: const [],
+        ),
+      ),
+    ],
+  );
+}
 
 class TopListItem extends StatelessWidget {
   final String name;

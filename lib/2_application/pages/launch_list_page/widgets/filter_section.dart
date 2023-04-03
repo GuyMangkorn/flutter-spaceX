@@ -5,6 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_sheet_filter.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: FilterSection)
+Widget filterSectionUseCase(BuildContext context) {
+  return FilterSection(
+    hintText: context.knobs.text(label: 'Hint text', initialValue: 'Search...'),
+  );
+}
 
 class FilterSection extends StatefulWidget {
   const FilterSection({

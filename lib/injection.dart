@@ -11,7 +11,8 @@ final sl = GetIt.I;
 
 Future<void> init() async {
   sl.registerFactory(() => LaunchDetailBloc(launchRepository: sl()));
-  sl.registerFactory(() => LaunchListBloc(launchRepository: sl()));
+  sl.registerFactory<LaunchListBloc>(
+      () => LaunchListBloc(launchRepository: sl()));
   sl.registerFactory(() => LaunchUpcomingListBloc(launchRepository: sl()));
 
   sl.registerFactory<LaunchRepository>(

@@ -3,8 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
 import 'package:space_x_demo/constants/constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
+import 'package:space_x_demo/injection.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
 
 const _defaultFilter = [false, false];
+
+@anno.WidgetbookUseCase(name: 'Default', type: BottomSheetFilter)
+Widget bottomSheetFilterUseCase(BuildContext context) {
+  final bloc = context.read<LaunchListBloc>();
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      BottomSheetFilter(bloc: bloc),
+    ],
+  );
+}
 
 class BottomSheetFilter extends StatelessWidget {
   final LaunchListBloc bloc;

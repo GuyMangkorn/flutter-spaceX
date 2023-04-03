@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: SkeletonDetailPage)
+Widget skeletonDetailPageUseCase(BuildContext context) {
+  return const SkeletonDetailPage();
+}
 
 class SkeletonDetailPage extends StatelessWidget {
   const SkeletonDetailPage({

@@ -2,7 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:space_x_demo/1_domain/entities/rocket_entity.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import 'package:space_x_demo/constants/constants.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: RocketSection)
+Widget rocketSectionUseCase(BuildContext context) {
+  final intl = S.of(context);
+  return RocketSection(
+    rocket: MockConstants.createRocketEntity(
+      name: context.knobs.text(label: 'Name', initialValue: 'Rocket_name'),
+      company: context.knobs.text(label: 'Company', initialValue: 'spaceX'),
+      description: context.knobs.text(
+          label: 'Description',
+          initialValue:
+              'Fugiat amet amet laborum dolor deserunt ea exercitation amet duis magna aliqua.'),
+    ),
+    intl: intl,
+  );
+}
+
+@anno.WidgetbookUseCase(name: 'With image', type: RocketSection)
+Widget rocketSectionWithImageUseCase(BuildContext context) {
+  final intl = S.of(context);
+  return RocketSection(
+    rocket: MockConstants.createRocketEntity(
+      name: context.knobs.text(label: 'Name', initialValue: 'Rocket_name'),
+      company: context.knobs.text(label: 'Company', initialValue: 'spaceX'),
+      description: context.knobs.text(
+          label: 'Description',
+          initialValue:
+              'Fugiat amet amet laborum dolor deserunt ea exercitation amet duis magna aliqua.'),
+      images: List.generate(
+        context.knobs
+            .slider(
+              label: 'Number of image',
+              initialValue: 1,
+              max: 20,
+              min: 1,
+            )
+            .toInt(),
+        (index) => '',
+      ),
+    ),
+    intl: intl,
+  );
+}
 
 class RocketSection extends StatelessWidget {
   const RocketSection({super.key, required this.rocket, required this.intl});

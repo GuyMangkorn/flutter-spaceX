@@ -1,35 +1,43 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:space_x_demo/2_application/routes/app_router.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 import 'package:space_x_demo/theme.dart';
 import 'package:space_x_demo/injection.dart' as di;
+import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 
 final router = AppRouter();
 
- class MyHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context){
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
+@WidgetbookApp.material(
+  name: 'Demo SpaceX Application',
+  devices: [
+    Apple.iPhone12,
+    Apple.iPhone13ProMax,
+  ],
+  foldersExpanded: true,
+  widgetsExpanded: true,
+)
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HttpOverrides.global=  MyHttpOverrides();
+  HttpOverrides.global = MyHttpOverrides();
   await di.init();
-  // await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

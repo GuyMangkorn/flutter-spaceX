@@ -15,6 +15,12 @@ import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/top_li
 import 'package:space_x_demo/constants/constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 import 'package:space_x_demo/injection.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
+
+@anno.WidgetbookUseCase(name: 'Default', type: LaunchListPage)
+Widget launchListPageUseCase(BuildContext context) {
+  return const LaunchListPage();
+}
 
 class LaunchListWrapper extends StatelessWidget {
   const LaunchListWrapper({super.key});
