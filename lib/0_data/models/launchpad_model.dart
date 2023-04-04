@@ -1,17 +1,26 @@
 import 'package:equatable/equatable.dart';
-import 'package:space_x_demo/1_domain/entities/laucnhpad_entity.dart';
 
-class LaunchpadModel extends LaunchpadEntity with EquatableMixin {
-  LaunchpadModel({
-    required super.id,
-    required super.name,
-    required super.fullName,
-    required super.locality,
-    required super.region,
-    required super.launchAttempts,
-    required super.launchSuccesses,
-    required super.details,
-    required super.image,
+class LaunchpadModel extends Equatable {
+  final String id;
+  final String name;
+  final String fullName;
+  final String locality;
+  final String region;
+  final int launchAttempts;
+  final int launchSuccesses;
+  final String details;
+  final List<String> image;
+
+  const LaunchpadModel({
+    required this.id,
+    required this.name,
+    required this.fullName,
+    required this.locality,
+    required this.region,
+    required this.launchAttempts,
+    required this.launchSuccesses,
+    required this.details,
+    required this.image,
   });
 
   factory LaunchpadModel.fromJson(Map<String, dynamic> json) {
@@ -31,4 +40,17 @@ class LaunchpadModel extends LaunchpadEntity with EquatableMixin {
   static List<String> fromListDynamicToString(List<dynamic> list) {
     return list.map((e) => e.toString()).toList();
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        fullName,
+        locality,
+        region,
+        launchAttempts,
+        launchSuccesses,
+        details,
+        image
+      ];
 }

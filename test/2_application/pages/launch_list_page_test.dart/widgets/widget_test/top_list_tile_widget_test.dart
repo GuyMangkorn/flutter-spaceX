@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/top_list_tile.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
@@ -87,7 +88,7 @@ void main() {
           () async => await widgetTester.pumpWidget(widgetUnderTest(
             id: 'id',
             date: 'date',
-            images: [ConstantsTest.mockNetworkURL],
+            images: [MockConstants.mockNetworkURL],
             name: 'name',
             onTap: () {},
           )),

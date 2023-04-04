@@ -10,12 +10,12 @@ class LaunchUpcomingListState extends Equatable {
   });
 
   final LaunchUpcomingListStatus status;
-  final List<LaunchEntity> list;
+  final List<LaunchModel> list;
   final String errorMessage;
 
   LaunchUpcomingListState copyWith({
     LaunchUpcomingListStatus Function()? status,
-    List<LaunchEntity> Function()? list,
+    List<LaunchModel> Function()? list,
     String Function()? errorMessage,
   }) {
     return LaunchUpcomingListState(

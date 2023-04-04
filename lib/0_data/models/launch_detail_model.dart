@@ -2,21 +2,32 @@ import 'package:equatable/equatable.dart';
 import 'package:space_x_demo/0_data/models/crew_model.dart';
 import 'package:space_x_demo/0_data/models/launchpad_model.dart';
 import 'package:space_x_demo/0_data/models/rocket_model.dart';
-import 'package:space_x_demo/1_domain/entities/launch_detail_entity.dart';
 
-class LaunchDetailModel extends LaunchDetailEntity with EquatableMixin {
+class LaunchDetailModel extends Equatable {
+  final String id;
+  final String name;
+  final String dateUtc;
+  final bool success;
+  final bool upcoming;
+  final String details;
+  final String article;
+  final String wikipedia;
+  final List<CrewModel> crew;
+  final RocketModel rocket;
+  final LaunchpadModel launchpad;
+
   const LaunchDetailModel({
-    required super.id,
-    required super.name,
-    required super.dateUtc,
-    required super.success,
-    required super.upcoming,
-    required super.details,
-    required super.crew,
-    required super.rocket,
-    required super.launchpad,
-    required super.article,
-    required super.wikipedia,
+    required this.dateUtc,
+    required this.id,
+    required this.name,
+    required this.success,
+    required this.upcoming,
+    required this.details,
+    required this.article,
+    required this.wikipedia,
+    required this.crew,
+    required this.rocket,
+    required this.launchpad,
   });
 
   factory LaunchDetailModel.fromJson(Map<String, dynamic> json) {
@@ -42,4 +53,19 @@ class LaunchDetailModel extends LaunchDetailEntity with EquatableMixin {
   static List<LaunchDetailModel> fromListJson(List<dynamic> list) {
     return list.map((e) => LaunchDetailModel.fromJson(e)).toList();
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        dateUtc,
+        success,
+        upcoming,
+        details,
+        article,
+        wikipedia,
+        crew,
+        rocket,
+        launchpad,
+      ];
 }

@@ -1,16 +1,22 @@
 import 'package:equatable/equatable.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
 
-class LaunchModel extends LaunchEntity with EquatableMixin {
-  const LaunchModel({
-    required super.id,
-    required super.name,
-    required super.dateUtc,
-    required super.success,
-    required super.upcoming,
-    required super.images,
-    required super.patch,
-  });
+class LaunchModel extends Equatable {
+  final String id;
+  final String name;
+  final String dateUtc;
+  final bool success;
+  final bool upcoming;
+  final List<String> images;
+  final String patch;
+
+  const LaunchModel(
+      {required this.dateUtc,
+      required this.id,
+      required this.name,
+      required this.success,
+      required this.upcoming,
+      required this.images,
+      required this.patch});
 
   factory LaunchModel.fromJson(Map<String, dynamic> json) {
     return LaunchModel(
@@ -34,4 +40,15 @@ class LaunchModel extends LaunchEntity with EquatableMixin {
       return LaunchModel.fromJson(e);
     }).toList();
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        dateUtc,
+        success,
+        upcoming,
+        images,
+        patch,
+      ];
 }

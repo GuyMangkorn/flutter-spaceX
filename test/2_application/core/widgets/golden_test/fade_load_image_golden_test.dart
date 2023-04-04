@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 
 import '../../../../../test_utils/test_utils.dart';
 
@@ -57,7 +58,7 @@ void main() {
               },
             )
             ..addScenario(
-              widget: widgetUnderTest(image: ConstantsTest.mockNetworkURL),
+              widget: widgetUnderTest(image: MockConstants.mockNetworkURL),
               name: 'placeholder wasn\'t set width and height',
               onCreate: (scenarioWidgetKey) async {
                 final networkImage = find.descendant(
@@ -71,7 +72,7 @@ void main() {
                   of: find.byKey(scenarioWidgetKey),
                   matching: find.widgetWithImage(
                     FadeLoadImage,
-                    const NetworkImage(ConstantsTest.mockNetworkURL),
+                    const NetworkImage(MockConstants.mockNetworkURL),
                   ),
                 );
 

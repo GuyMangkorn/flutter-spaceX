@@ -4,11 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
-import 'package:space_x_demo/1_domain/entities/laucnhpad_entity.dart';
-import 'package:space_x_demo/1_domain/entities/launch_detail_entity.dart';
-import 'package:space_x_demo/1_domain/entities/rocket_entity.dart';
-import 'package:space_x_demo/1_domain/failure/failures.dart';
+import 'package:space_x_demo/0_data/models/crew_model.dart';
+import 'package:space_x_demo/0_data/models/launch_detail_model.dart';
+import 'package:space_x_demo/0_data/models/launchpad_model.dart';
+import 'package:space_x_demo/0_data/models/rocket_model.dart';
 import 'package:space_x_demo/2_application/core/widgets/error_message.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/bloc/launch_detail_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/launch_detail_page.dart';
@@ -17,16 +16,16 @@ import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/laun
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/rocket_section.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/skeleton_detail_page.dart';
 import 'package:space_x_demo/2_application/routes/argument_model/launch_detail_argument.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
-
-import '../../../../test_utils/test_utils.dart';
+import 'package:space_x_demo/utils/failure/failures.dart';
 
 class MockLaunchDetailBloc
     extends MockBloc<LaunchDetailEvent, LaunchDetailState>
     implements LaunchDetailBloc {}
 
 void main() {
-  const mockLaunchDetail = LaunchDetailEntity(
+  const mockLaunchDetail = LaunchDetailModel(
     dateUtc: 'dateUtc',
     id: 'id',
     name: 'name',
@@ -36,7 +35,7 @@ void main() {
     article: 'article',
     wikipedia: 'wikipedia',
     crew: [
-      CrewEntity(
+      CrewModel(
           id: 'id',
           name: 'name',
           agency: 'agency',
@@ -44,7 +43,7 @@ void main() {
           wikipedia: 'wikipedia',
           status: 'status')
     ],
-    rocket: RocketEntity(
+    rocket: RocketModel(
         id: 'id',
         name: 'name',
         images: [],
@@ -52,7 +51,7 @@ void main() {
         country: 'country',
         company: 'company',
         description: 'description'),
-    launchpad: LaunchpadEntity(
+    launchpad: LaunchpadModel(
       id: 'id',
       name: 'name',
       fullName: 'fullName',
@@ -118,7 +117,7 @@ void main() {
         const title = 'test_name';
         mockLaunchDetailArgument = createSubject(
           name: title,
-          image: ConstantsTest.mockNetworkURL,
+          image: MockConstants.mockNetworkURL,
         );
 
         await mockNetworkImagesFor(

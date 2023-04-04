@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
+import 'package:space_x_demo/0_data/models/crew_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/crews_section.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
 void main() {
-  Widget widgetUnderTest({required List<CrewEntity> crews}) {
+  Widget widgetUnderTest({required List<CrewModel> crews}) {
     return Scaffold(
       body: CrewsSection(
         crews: crews,
@@ -18,8 +19,8 @@ void main() {
     );
   }
 
-  final mockCrewScenario1 = ConstantsTest.mockCrews;
-  final mockCrewScenario2 = ConstantsTest.mockNetworkImageCrews;
+  final mockCrewScenario1 = MockConstants.mockCrews;
+  final mockCrewScenario2 = MockConstants.mockNetworkImageCrews;
 
   group('CrewSection golden', () {
     testGoldens(

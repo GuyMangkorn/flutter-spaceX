@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_list_section.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
@@ -9,7 +9,7 @@ const mockLength = 4;
 void main() {
   final mockData = List.generate(
     mockLength,
-    (index) => LaunchEntity(
+    (index) => LaunchModel(
       dateUtc: 'dateUtc',
       id: 'id$index',
       name: 'name$index',
@@ -21,7 +21,7 @@ void main() {
   );
 
   Widget widgetUnderTest({
-    required List<LaunchEntity> listData,
+    required List<LaunchModel> listData,
   }) {
     return MaterialApp(
       home: Column(

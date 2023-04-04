@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:space_x_demo/0_data/repositories/launch_repo_impl.dart';
-import 'package:space_x_demo/1_domain/entities/filter_entity.dart';
+import 'package:space_x_demo/0_data/models/filter_model.dart';
+import 'package:space_x_demo/0_data/repositories/launch_repository.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_sheet_filter.dart';
 import 'package:space_x_demo/generated/l10n.dart';
@@ -81,7 +81,7 @@ void main() {
             mockBloc,
             Stream.fromIterable(const [
               LaunchListState(
-                filter: FilterEntity(
+                filter: FilterModel(
                     filterByDate: false, filterByName: true, filterFlag: 1),
               ),
             ]),
@@ -108,7 +108,7 @@ void main() {
             mockBloc,
             Stream.fromIterable(const [
               LaunchListState(
-                filter: FilterEntity(
+                filter: FilterModel(
                     filterByDate: true, filterByName: false, filterFlag: 1),
               ),
             ]),

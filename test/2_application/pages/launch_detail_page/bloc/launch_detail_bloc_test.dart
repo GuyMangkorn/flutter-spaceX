@@ -2,26 +2,25 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:space_x_demo/0_data/repositories/launch_repo_impl.dart';
-import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
-import 'package:space_x_demo/1_domain/entities/laucnhpad_entity.dart';
-import 'package:space_x_demo/1_domain/entities/launch_detail_entity.dart';
-import 'package:space_x_demo/1_domain/entities/rocket_entity.dart';
-import 'package:space_x_demo/1_domain/failure/failures.dart';
-import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
+import 'package:space_x_demo/0_data/models/crew_model.dart';
+import 'package:space_x_demo/0_data/models/launch_detail_model.dart';
+import 'package:space_x_demo/0_data/models/launchpad_model.dart';
+import 'package:space_x_demo/0_data/models/rocket_model.dart';
+import 'package:space_x_demo/0_data/repositories/launch_repository.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/bloc/launch_detail_bloc.dart';
+import 'package:space_x_demo/utils/failure/failures.dart';
 
 class MockLaunchRepository extends Mock implements LaunchRepositoryImpl {}
 
-class MockCrewEntity extends Mock implements CrewEntity {}
+class MockCrewEntity extends Mock implements CrewModel {}
 
-class MockRocketEntity extends Mock implements RocketEntity {}
+class MockRocketEntity extends Mock implements RocketModel {}
 
-class MockLaunchpadEntity extends Mock implements LaunchpadEntity {}
+class MockLaunchpadEntity extends Mock implements LaunchpadModel {}
 
 void main() {
   final LaunchRepository mockLaunchRepository = MockLaunchRepository();
-  final LaunchDetailEntity mockResponse = LaunchDetailEntity(
+  final LaunchDetailModel mockResponse = LaunchDetailModel(
     dateUtc: 'dateUtc',
     id: 'id',
     name: 'name',
@@ -67,7 +66,7 @@ void main() {
             ),
           ).thenAnswer(
             (invocation) => Future.value(
-              Left<LaunchDetailEntity, Failure>(mockResponse),
+              Left<LaunchDetailModel, Failure>(mockResponse),
             ),
           );
         },

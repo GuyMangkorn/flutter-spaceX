@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
+import 'package:space_x_demo/0_data/models/crew_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/crews_section.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
-
-import '../../../../../../test_utils/test_utils.dart';
 
 const mockLength = 10;
 void main() {
-  Widget widgetUnderTest({required List<CrewEntity> crews}) {
+  Widget widgetUnderTest({required List<CrewModel> crews}) {
     return MaterialApp(
       home: CrewsSection(crews: crews, intl: S()),
     );
@@ -20,7 +19,7 @@ void main() {
       testWidgets('when a list of crew and image was given',
           (widgetTester) async {
         await mockNetworkImagesFor(() async => await widgetTester.pumpWidget(
-            widgetUnderTest(crews: ConstantsTest.mockNetworkImageCrews)));
+            widgetUnderTest(crews: MockConstants.mockNetworkImageCrews)));
         await widgetTester.pump(const Duration(milliseconds: 500));
 
         final item1 = find.text('name0');
@@ -41,7 +40,7 @@ void main() {
         const name =
             'Eu id laborum minim ea esse sunt.Et qui sint quis ipsum proident consectetur et irure quis Lorem duis amet cupidatat.';
         await widgetTester.pumpWidget(widgetUnderTest(crews: const [
-          CrewEntity(
+          CrewModel(
             id: 'id',
             name: name,
             agency: 'agency',
@@ -59,7 +58,7 @@ void main() {
       testWidgets('when an image wasn\'t given', (widgetTester) async {
         const name = 'test_name';
         await widgetTester.pumpWidget(widgetUnderTest(crews: const [
-          CrewEntity(
+          CrewModel(
             id: 'id',
             name: name,
             agency: 'agency',

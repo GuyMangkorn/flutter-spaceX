@@ -1,10 +1,18 @@
 import 'package:equatable/equatable.dart';
 import 'package:space_x_demo/0_data/models/launch_model.dart';
 import 'package:space_x_demo/0_data/models/pagination_data_model.dart';
-import 'package:space_x_demo/1_domain/entities/launch_response_entity.dart';
 
-class LaunchResponseModel extends LaunchResponseEntity with EquatableMixin {
-  LaunchResponseModel({required super.list, super.paginationData});
+class LaunchResponseModel extends Equatable {
+  final List<LaunchModel> list;
+  final PaginationDataModel? paginationData;
+
+  const LaunchResponseModel({
+    required this.list,
+    this.paginationData = const PaginationDataModel(
+      hasNextPage: false,
+      page: 1,
+    ),
+  });
 
   factory LaunchResponseModel.fromJson(Map<String, dynamic> json) {
     return LaunchResponseModel(
@@ -12,4 +20,10 @@ class LaunchResponseModel extends LaunchResponseEntity with EquatableMixin {
       paginationData: PaginationDataModel.fromJson(json),
     );
   }
+
+  @override
+  List<Object?> get props => [
+        list,
+        paginationData,
+      ];
 }

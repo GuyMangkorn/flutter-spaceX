@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:space_x_demo/1_domain/entities/laucnhpad_entity.dart';
+import 'package:space_x_demo/0_data/models/launchpad_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/launchpad_section.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
 void main() {
-  Widget widgetUnderTest({required LaunchpadEntity launchpad}) {
+  Widget widgetUnderTest({required LaunchpadModel launchpad}) {
     return Scaffold(
       body: LaunchpadSection(
         launchpad: launchpad,
@@ -18,10 +19,11 @@ void main() {
     );
   }
 
-  final mockScenario1 = createLaunchpadEntity();
-  final mockScenario2 = createLaunchpadEntity(image: ['']);
+  final mockScenario1 = MockConstants.createLaunchpadEntity();
+  final mockScenario2 = MockConstants.createLaunchpadEntity(image: ['']);
   final mockScenario3 =
-      createLaunchpadEntity(image: [ConstantsTest.mockNetworkURL]);
+      MockConstants.createLaunchpadEntity(
+      image: [MockConstants.mockNetworkURL]);
 
   group('LaunchpadSection golden', () {
     testGoldens(
@@ -131,7 +133,7 @@ void main() {
                   of: find.byKey(scenarioWidgetKey),
                   matching: find.widgetWithImage(
                     LaunchpadSection,
-                    const NetworkImage(ConstantsTest.mockNetworkURL),
+                    const NetworkImage(MockConstants.mockNetworkURL),
                   ),
                 );
 

@@ -10,10 +10,8 @@ import 'package:space_x_demo/0_data/models/launch_response_model.dart';
 import 'package:space_x_demo/0_data/models/launchpad_model.dart';
 import 'package:space_x_demo/0_data/models/pagination_data_model.dart';
 import 'package:space_x_demo/0_data/models/rocket_model.dart';
-import 'package:space_x_demo/0_data/repositories/launch_repo_impl.dart';
-import 'package:space_x_demo/1_domain/entities/launch_response_entity.dart';
-import 'package:space_x_demo/1_domain/failure/failures.dart';
-import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
+import 'package:space_x_demo/0_data/repositories/launch_repository.dart';
+import 'package:space_x_demo/utils/failure/failures.dart';
 
 class MockLaunchRemoteDataSource extends Mock
     implements LaunchRemoteDataSourceImpl {}
@@ -45,7 +43,7 @@ void main() {
       expect(response.isRight(), false);
       expect(
         response,
-        Left<LaunchResponseEntity, Failure>(
+        Left<LaunchResponseModel, Failure>(
           LaunchResponseModel(
             list: const <LaunchModel>[],
             paginationData: PaginationDataModel(hasNextPage: false, page: 1),
@@ -160,7 +158,7 @@ void main() {
 
         expect(response.isRight(), true);
         expect(response.isLeft(), false);
-        expect(response, Right<LaunchResponseEntity, Failure>(ServerFailure()));
+        expect(response, Right<LaunchResponseModel, Failure>(ServerFailure()));
       });
 
       test('a GeneralFailure when FetchDataException occurs', () async {
@@ -173,7 +171,7 @@ void main() {
         expect(response.isRight(), true);
         expect(response.isLeft(), false);
         expect(
-            response, Right<LaunchResponseEntity, Failure>(GeneralFailure()));
+            response, Right<LaunchResponseModel, Failure>(GeneralFailure()));
       });
 
       test('a BadRequestFailure when BadRequestException occurs', () async {
@@ -186,7 +184,7 @@ void main() {
         expect(response.isRight(), true);
         expect(response.isLeft(), false);
         expect(response,
-            Right<LaunchResponseEntity, Failure>(BadRequestFailure()));
+            Right<LaunchResponseModel, Failure>(BadRequestFailure()));
       });
     });
   });

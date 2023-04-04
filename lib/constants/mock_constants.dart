@@ -1,7 +1,7 @@
-import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
-import 'package:space_x_demo/1_domain/entities/laucnhpad_entity.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
-import 'package:space_x_demo/1_domain/entities/rocket_entity.dart';
+import 'package:space_x_demo/0_data/models/crew_model.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
+import 'package:space_x_demo/0_data/models/launchpad_model.dart';
+import 'package:space_x_demo/0_data/models/rocket_model.dart';
 
 class MockConstants {
   static const mockNetworkURL =
@@ -11,7 +11,7 @@ class MockConstants {
 
   static final mockCrews = List.generate(
     mockLength,
-    (index) => CrewEntity(
+    (index) => CrewModel(
       id: 'id',
       name: 'name$index',
       agency: 'agency',
@@ -23,7 +23,7 @@ class MockConstants {
 
   static final mockNetworkImageCrews = List.generate(
     mockLength,
-    (index) => CrewEntity(
+    (index) => CrewModel(
       id: 'id',
       name: 'name$index',
       agency: 'agency',
@@ -35,7 +35,7 @@ class MockConstants {
 
   static final mockListLaunch = List.generate(
     mockLength,
-    (index) => LaunchEntity(
+    (index) => LaunchModel(
       dateUtc: 'dateUtc',
       id: 'id$index',
       name: 'name$index',
@@ -48,7 +48,7 @@ class MockConstants {
 
   static final mockListLaunchNetworkImage = List.generate(
     mockLength,
-    (index) => LaunchEntity(
+    (index) => LaunchModel(
       dateUtc: 'dateUtc',
       id: 'id$index',
       name: 'name$index',
@@ -59,7 +59,7 @@ class MockConstants {
     ),
   );
 
-  static LaunchpadEntity createLaunchpadEntity({
+  static LaunchpadModel createLaunchpadEntity({
     String id = 'id',
     String name = 'spaceX',
     String fullName = 'spaceX by SpaceX',
@@ -71,7 +71,7 @@ class MockConstants {
         'Velit cillum laboris aute sint sunt.Aute ea officia deserunt ea adipisicing fugiat pariatur et cillum.Aliquip voluptate culpa velit tempor incididunt.',
     List<String> image = const [],
   }) {
-    return LaunchpadEntity(
+    return LaunchpadModel(
       id: id,
       name: name,
       fullName: fullName,
@@ -84,7 +84,7 @@ class MockConstants {
     );
   }
 
-  static RocketEntity createRocketEntity({
+  static RocketModel createRocketEntity({
     String id = 'id',
     String name = 'name',
     List<String> images = const [],
@@ -94,7 +94,7 @@ class MockConstants {
     String description =
         'description Est do ad sint irure do.Excepteur labore proident nulla ut in commodo.Excepteur labore enim in minim sunt aliqua.',
   }) {
-    return RocketEntity(
+    return RocketModel(
       id: id,
       name: name,
       images: images,

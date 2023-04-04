@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_list_section.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
 void main() {
-  Widget widgetUnderTest({required List<LaunchEntity> listData}) {
+  Widget widgetUnderTest({required List<LaunchModel> listData}) {
     return Scaffold(
       body: Column(
         children: [
@@ -31,7 +32,7 @@ void main() {
               Device.tabletPortrait,
             ])
             ..addScenario(
-              widget: widgetUnderTest(listData: ConstantsTest.mockListLaunch),
+              widget: widgetUnderTest(listData: MockConstants.mockListLaunch),
               name: 'list with placeholder',
               onCreate: (scenarioWidgetKey) async {
                 final placeholderImage = find.descendant(
@@ -45,7 +46,7 @@ void main() {
             )
             ..addScenario(
               widget: widgetUnderTest(
-                  listData: ConstantsTest.mockListLaunchNetworkImage),
+                  listData: MockConstants.mockListLaunchNetworkImage),
               name: 'list with network image',
               onCreate: (scenarioWidgetKey) async {
                 final networkImage = find.descendant(

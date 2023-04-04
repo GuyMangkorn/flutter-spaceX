@@ -2,23 +2,22 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:space_x_demo/0_data/repositories/launch_repo_impl.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
-import 'package:space_x_demo/1_domain/entities/launch_response_entity.dart';
-import 'package:space_x_demo/1_domain/failure/failures.dart';
-import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
+import 'package:space_x_demo/0_data/models/launch_response_model.dart';
+import 'package:space_x_demo/0_data/repositories/launch_repository.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_upcoming_list_bloc.dart';
+import 'package:space_x_demo/utils/failure/failures.dart';
 
 class MockLaunchRepository extends Mock implements LaunchRepositoryImpl {}
 
-class FakeLaunchEntity extends Fake implements LaunchEntity {}
+class FakeLaunchEntity extends Fake implements LaunchModel {}
 
 void main() {
   late LaunchRepository mockLaunchRepository;
   late Map<String, dynamic> payload;
 
-  const List<LaunchEntity> mockResponse = [
-    LaunchEntity(
+  const List<LaunchModel> mockResponse = [
+    LaunchModel(
       dateUtc: 'dateUtc',
       id: 'id',
       name: 'name',
@@ -64,7 +63,7 @@ void main() {
             when(() => mockLaunchRepository.fetchListLaunchQuery(payload))
                 .thenAnswer(
               (invocation) => Future.value(
-                const Left(LaunchResponseEntity(list: mockResponse)),
+                const Left(LaunchResponseModel(list: mockResponse)),
               ),
             );
           },

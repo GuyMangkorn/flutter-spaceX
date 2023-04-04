@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:space_x_demo/1_domain/entities/rocket_entity.dart';
+import 'package:space_x_demo/0_data/models/rocket_model.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/rocket_section.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
 void main() {
-  late RocketEntity mockRocket;
-  RocketEntity createSubject({
+  late RocketModel mockRocket;
+  RocketModel createSubject({
     String id = 'id',
     String name = 'name',
     List<String> images = const [],
@@ -19,7 +20,7 @@ void main() {
     String company = 'company',
     String description = 'description',
   }) {
-    return RocketEntity(
+    return RocketModel(
       id: id,
       name: name,
       images: images,
@@ -30,7 +31,7 @@ void main() {
     );
   }
 
-  Widget widgetUnderTest({required RocketEntity rocket}) {
+  Widget widgetUnderTest({required RocketModel rocket}) {
     return MaterialApp(
       home: RocketSection(rocket: rocket, intl: S()),
     );
@@ -114,7 +115,7 @@ void main() {
       });
 
       testWidgets('when a image list with url was given', (widgetTester) async {
-        mockRocket = createSubject(images: [ConstantsTest.mockNetworkURL]);
+        mockRocket = createSubject(images: [MockConstants.mockNetworkURL]);
         await mockNetworkImagesFor(() async =>
             await widgetTester.pumpWidget(widgetUnderTest(rocket: mockRocket)));
         await widgetTester.pump(const Duration(milliseconds: 500));

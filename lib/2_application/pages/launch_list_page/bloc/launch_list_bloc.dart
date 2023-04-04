@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:space_x_demo/1_domain/entities/filter_entity.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
-import 'package:space_x_demo/1_domain/entities/pagination_data_entity.dart';
-import 'package:space_x_demo/1_domain/failure/failures.dart';
-import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
+import 'package:space_x_demo/0_data/models/filter_model.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
+import 'package:space_x_demo/0_data/models/pagination_data_model.dart';
+import 'package:space_x_demo/0_data/repositories/launch_repository.dart';
+import 'package:space_x_demo/utils/failure/failures.dart';
 
 part 'launch_list_event.dart';
 part 'launch_list_state.dart';
@@ -110,7 +110,7 @@ class LaunchListBloc extends Bloc<LaunchListEvent, LaunchListState> {
   ) async {
     emit(
       state.copyWith(
-        filter: () => FilterEntity(
+        filter: () => FilterModel(
           filterByDate: event.filterByDate,
           filterByName: event.filterByName,
           filterFlag: event.filterFlag,

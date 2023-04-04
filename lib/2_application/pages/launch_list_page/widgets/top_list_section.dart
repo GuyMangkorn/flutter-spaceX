@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/top_list_tile.dart';
 import 'package:space_x_demo/2_application/routes/argument_model/launch_detail_argument.dart';
 import 'package:space_x_demo/constants/constants.dart';
@@ -17,7 +17,7 @@ Widget topListSectionUseCase(BuildContext context) {
   );
 }
 class TopListSection extends StatelessWidget {
-  final List<LaunchEntity> listData;
+  final List<LaunchModel> listData;
 
   const TopListSection({
     super.key,

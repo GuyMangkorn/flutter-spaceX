@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
+import 'package:space_x_demo/0_data/models/crew_model.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import 'package:space_x_demo/constants/constants.dart';
 import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
-import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as anno;
 
 @anno.WidgetbookUseCase(name: 'Default', type: CrewsSection)
@@ -23,7 +22,7 @@ class CrewsSection extends StatelessWidget {
     required this.intl,
   });
 
-  final List<CrewEntity> crews;
+  final List<CrewModel> crews;
   final S intl;
 
   @override

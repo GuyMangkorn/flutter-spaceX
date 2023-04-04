@@ -4,28 +4,28 @@ enum LaunchListStatus { initial, loading, success, failure, refresh }
 
 class LaunchListState extends Equatable {
   final LaunchListStatus status;
-  final List<LaunchEntity> list;
+  final List<LaunchModel> list;
   final String errorMessage;
-  final PaginationDataEntity paginationData;
-  final FilterEntity filter;
+  final PaginationDataModel paginationData;
+  final FilterModel filter;
 
   const LaunchListState({
     this.status = LaunchListStatus.initial,
     this.list = const [],
     this.errorMessage = '',
-    this.paginationData = const PaginationDataEntity(
+    this.paginationData = const PaginationDataModel(
       hasNextPage: false,
       page: 1,
     ),
-    this.filter = const FilterEntity(),
+    this.filter = const FilterModel(),
   });
 
   LaunchListState copyWith(
       {LaunchListStatus Function()? status,
-      List<LaunchEntity> Function()? list,
+      List<LaunchModel> Function()? list,
       String Function()? errorMessage,
-      PaginationDataEntity Function()? paginationData,
-      FilterEntity Function()? filter}) {
+      PaginationDataModel Function()? paginationData,
+      FilterModel Function()? filter}) {
     return LaunchListState(
       status: status != null ? status() : this.status,
       list: list != null ? list() : this.list,

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:space_x_demo/1_domain/entities/rocket_entity.dart';
+import 'package:space_x_demo/0_data/models/rocket_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/rocket_section.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
 void main() {
-  Widget widgetUnderTest({required RocketEntity rocket}) {
+  Widget widgetUnderTest({required RocketModel rocket}) {
     return Scaffold(
       body: RocketSection(
         rocket: rocket,
@@ -18,14 +19,14 @@ void main() {
     );
   }
 
-  final mockScenario1 = createRocketEntity();
-  final mockScenario2 = createRocketEntity(images: ['', '', '']);
-  final mockScenario3 = createRocketEntity(images: [
-    ConstantsTest.mockNetworkURL,
-    ConstantsTest.mockNetworkURL,
-    ConstantsTest.mockNetworkURL
+  final mockScenario1 = MockConstants.createRocketEntity();
+  final mockScenario2 = MockConstants.createRocketEntity(images: ['', '', '']);
+  final mockScenario3 = MockConstants.createRocketEntity(images: [
+    MockConstants.mockNetworkURL,
+    MockConstants.mockNetworkURL,
+    MockConstants.mockNetworkURL
   ]);
-  final mockScenario4 = createRocketEntity(
+  final mockScenario4 = MockConstants.createRocketEntity(
       name:
           'Tempor anim proident non ipsum nostrud in.Aliqua aliquip anim Lorem eiusmod ullamco.Ex cupidatat anim labore cupidatat cupidatat aliqua minim quis Lorem anim eu magna.');
   group('RocketSection golden', () {
@@ -132,7 +133,7 @@ void main() {
                 final matchExactUrl = find.descendant(
                   of: find.byKey(scenarioWidgetKey),
                   matching: find.widgetWithImage(RocketSection,
-                      const NetworkImage(ConstantsTest.mockNetworkURL)),
+                      const NetworkImage(MockConstants.mockNetworkURL)),
                 );
 
                 expect(imageWidget, findsAtLeastNWidgets(1));

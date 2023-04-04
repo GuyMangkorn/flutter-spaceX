@@ -4,6 +4,7 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/top_list_tile.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
@@ -112,7 +113,7 @@ void main() {
               id: 'id',
               date: 'date_test',
               onTap: mockOnTab,
-              images: [ConstantsTest.mockNetworkURL],
+              images: [MockConstants.mockNetworkURL],
             ),
             name: 'network image',
             onCreate: (scenarioWidgetKey) async {
@@ -143,7 +144,7 @@ void main() {
               final matchExactUrl = find.descendant(
                 of: find.byKey(scenarioWidgetKey),
                 matching: find.widgetWithImage(TopListItem,
-                    const NetworkImage(ConstantsTest.mockNetworkURL)),
+                    const NetworkImage(MockConstants.mockNetworkURL)),
               );
 
               await tester.tap(tileWidget);

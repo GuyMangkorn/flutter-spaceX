@@ -10,12 +10,12 @@ class LaunchDetailState extends Equatable {
   });
 
   final LaunchDetailStatus status;
-  final List<LaunchDetailEntity> detail;
+  final List<LaunchDetailModel> detail;
   final String errorMessage;
 
   LaunchDetailState copyWith({
     LaunchDetailStatus Function()? status,
-    List<LaunchDetailEntity> Function()? detail,
+    List<LaunchDetailModel> Function()? detail,
     String Function()? errorMessage,
   }) {
     return LaunchDetailState(

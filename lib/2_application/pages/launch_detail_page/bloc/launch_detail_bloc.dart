@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:space_x_demo/1_domain/entities/launch_detail_entity.dart';
-import 'package:space_x_demo/1_domain/failure/failures.dart';
-import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
+import 'package:space_x_demo/0_data/models/launch_detail_model.dart';
+import 'package:space_x_demo/0_data/repositories/launch_repository.dart';
+import 'package:space_x_demo/utils/failure/failures.dart';
 
 part 'launch_detail_event.dart';
 part 'launch_detail_state.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_list_tile.dart';
 import 'package:space_x_demo/2_application/routes/argument_model/launch_detail_argument.dart';
@@ -21,7 +21,7 @@ Widget bottomListSectionUseCase(BuildContext context) {
 }
 
 class BottomListSection extends StatefulWidget {
-  final List<LaunchEntity> listData;
+  final List<LaunchModel> listData;
 
   const BottomListSection({
     required this.listData,

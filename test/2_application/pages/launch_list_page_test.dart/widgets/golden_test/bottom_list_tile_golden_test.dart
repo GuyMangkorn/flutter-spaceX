@@ -4,6 +4,7 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/bottom_list_tile.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
@@ -134,7 +135,7 @@ void main() {
                 name: 'test_name',
                 date: '12-12-2022',
                 onTap: mockOnTab,
-                images: [ConstantsTest.mockNetworkURL],
+                images: [MockConstants.mockNetworkURL],
                 isSuccess: true,
               ),
               name: 'normal text with network image',
@@ -162,7 +163,7 @@ void main() {
                   of: find.byKey(scenarioWidgetKey),
                   matching: find.widgetWithImage(
                     BottomListTile,
-                    const NetworkImage(ConstantsTest.mockNetworkURL),
+                    const NetworkImage(MockConstants.mockNetworkURL),
                   ),
                 );
 

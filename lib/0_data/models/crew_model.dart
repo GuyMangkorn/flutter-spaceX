@@ -1,14 +1,20 @@
 import 'package:equatable/equatable.dart';
-import 'package:space_x_demo/1_domain/entities/crew_entity.dart';
 
-class CrewModel extends CrewEntity with EquatableMixin {
-  CrewModel(
-      {required super.id,
-      required super.name,
-      required super.agency,
-      required super.image,
-      required super.wikipedia,
-      required super.status});
+class CrewModel extends Equatable {
+  final String id;
+  final String name;
+  final String agency;
+  final String image;
+  final String wikipedia;
+  final String status;
+  const CrewModel({
+    required this.id,
+    required this.name,
+    required this.agency,
+    required this.image,
+    required this.wikipedia,
+    required this.status,
+  });
 
   factory CrewModel.fromJson(Map<String, dynamic> json) {
     return CrewModel(
@@ -24,4 +30,7 @@ class CrewModel extends CrewEntity with EquatableMixin {
   static List<CrewModel> fromListJson(List<dynamic> list) {
     return list.map((e) => CrewModel.fromJson(e)).toList();
   }
+
+  @override
+  List<Object?> get props => [id, name, agency, image, wikipedia, status];
 }

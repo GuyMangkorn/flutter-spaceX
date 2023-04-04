@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class FilterEntity extends Equatable {
-  const FilterEntity({
+class FilterModel extends Equatable {
+  const FilterModel({
     this.filterByName = false,
     this.filterByDate = true,
     this.filterFlag = -1,

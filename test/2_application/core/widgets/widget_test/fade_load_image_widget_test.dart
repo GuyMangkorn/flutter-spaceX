@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 
 import '../../../../../test_utils/test_utils.dart';
 
@@ -43,7 +44,7 @@ void main() {
       });
 
       testWidgets('when an image URL was given', (widgetTester) async {
-        const url = ConstantsTest.mockNetworkURL;
+        const url = MockConstants.mockNetworkURL;
         const double width = 400;
         const double height = 200;
         await mockNetworkImagesFor(

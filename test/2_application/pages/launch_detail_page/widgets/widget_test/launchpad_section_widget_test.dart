@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:space_x_demo/1_domain/entities/laucnhpad_entity.dart';
+import 'package:space_x_demo/0_data/models/launchpad_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_detail_page/widgets/launchpad_section.dart';
+import 'package:space_x_demo/constants/mock_constants.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 
 import '../../../../../../test_utils/test_utils.dart';
 
 void main() {
-  LaunchpadEntity createSubject({
+  LaunchpadModel createSubject({
     String id = 'id',
     String name = 'name',
     String fullName = 'fullName',
@@ -19,7 +20,7 @@ void main() {
     String details = 'details',
     List<String> image = const [],
   }) {
-    return LaunchpadEntity(
+    return LaunchpadModel(
       id: id,
       name: name,
       fullName: fullName,
@@ -32,7 +33,7 @@ void main() {
     );
   }
 
-  Widget widgetUnderTest({required LaunchpadEntity launchpadEntity}) {
+  Widget widgetUnderTest({required LaunchpadModel launchpadEntity}) {
     return MaterialApp(
       home: LaunchpadSection(
         launchpad: launchpadEntity,
@@ -42,7 +43,7 @@ void main() {
   }
 
   group('LaunchpadSection', () {
-    late LaunchpadEntity mockLaunchpad;
+    late LaunchpadModel mockLaunchpad;
 
     setUp(() {
       mockLaunchpad = createSubject();
@@ -137,7 +138,7 @@ void main() {
       });
 
       testWidgets('when a Launchpad with a image given', (widgetTester) async {
-        mockLaunchpad = createSubject(image: [ConstantsTest.mockNetworkURL]);
+        mockLaunchpad = createSubject(image: [MockConstants.mockNetworkURL]);
         await mockNetworkImagesFor(() async => await widgetTester
             .pumpWidget(widgetUnderTest(launchpadEntity: mockLaunchpad)));
         await widgetTester.pump(const Duration(milliseconds: 500));

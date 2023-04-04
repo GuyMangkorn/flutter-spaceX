@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/widgets/top_list_section.dart';
 
 const mockLength = 4;
@@ -8,7 +8,7 @@ const mockLength = 4;
 void main() {
   final mockData = List.generate(
     mockLength,
-    (index) => LaunchEntity(
+    (index) => LaunchModel(
       dateUtc: 'dateUtc',
       id: 'id$index',
       name: 'name$index',
@@ -18,7 +18,7 @@ void main() {
       patch: '',
     ),
   );
-  Widget widgetUnderTest({required List<LaunchEntity> listData}) {
+  Widget widgetUnderTest({required List<LaunchModel> listData}) {
     return MaterialApp(
       home: TopListSection(listData: listData),
     );

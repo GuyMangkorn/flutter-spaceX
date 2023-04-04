@@ -48,7 +48,7 @@ class SkeletonBottomList extends StatelessWidget {
                         lines: Constants.paragraphSkeletonLines,
                         spacing: Constants.paragraphSkeletonSpacing,
                         lineStyle: SkeletonLineStyle(
-                          randomLength: true,
+                          randomLength: false,
                           height: Constants.paragraphSkeletonHeight,
                           borderRadius:
                               BorderRadius.circular(Constants.baseRadius),

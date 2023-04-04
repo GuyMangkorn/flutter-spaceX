@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_demo/1_domain/entities/laucnhpad_entity.dart';
+import 'package:space_x_demo/0_data/models/launchpad_model.dart';
 import 'package:space_x_demo/2_application/core/widgets/fade_load_image.dart';
 import 'package:space_x_demo/constants/constants.dart';
 import 'package:space_x_demo/constants/mock_constants.dart';
@@ -40,7 +40,7 @@ class LaunchpadSection extends StatelessWidget {
   const LaunchpadSection(
       {super.key, required this.launchpad, required this.intl});
 
-  final LaunchpadEntity launchpad;
+  final LaunchpadModel launchpad;
   final S intl;
 
   @override

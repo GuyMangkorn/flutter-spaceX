@@ -2,23 +2,22 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:space_x_demo/0_data/repositories/launch_repo_impl.dart';
-import 'package:space_x_demo/1_domain/entities/filter_entity.dart';
-import 'package:space_x_demo/1_domain/entities/launch_entity.dart';
-import 'package:space_x_demo/1_domain/entities/launch_response_entity.dart';
-import 'package:space_x_demo/1_domain/entities/pagination_data_entity.dart';
-import 'package:space_x_demo/1_domain/failure/failures.dart';
-import 'package:space_x_demo/1_domain/repositories/launch_repo.dart';
+import 'package:space_x_demo/0_data/models/filter_model.dart';
+import 'package:space_x_demo/0_data/models/launch_model.dart';
+import 'package:space_x_demo/0_data/models/launch_response_model.dart';
+import 'package:space_x_demo/0_data/models/pagination_data_model.dart';
+import 'package:space_x_demo/0_data/repositories/launch_repository.dart';
 import 'package:space_x_demo/2_application/pages/launch_list_page/bloc/launch_list_bloc.dart';
+import 'package:space_x_demo/utils/failure/failures.dart';
 
 class MockLaunchRepository extends Mock implements LaunchRepositoryImpl {}
 
-class FakeLaunchEntity extends Fake implements LaunchEntity {}
+class FakeLaunchEntity extends Fake implements LaunchModel {}
 
 void main() {
   late LaunchRepository mockLaunchRepository;
-  const List<LaunchEntity> mockResponse = [
-    LaunchEntity(
+  const List<LaunchModel> mockResponse = [
+    LaunchModel(
       dateUtc: 'dateUtc',
       id: 'id',
       name: 'name',
@@ -67,10 +66,10 @@ void main() {
                 .thenAnswer(
               (invocation) => Future.value(
                 const Left(
-                  LaunchResponseEntity(
+                  LaunchResponseModel(
                     list: mockResponse,
                     paginationData:
-                        PaginationDataEntity(hasNextPage: true, page: 2),
+                        PaginationDataModel(hasNextPage: true, page: 2),
                   ),
                 ),
               ),
@@ -79,7 +78,7 @@ void main() {
           seed: () => const LaunchListState(
             list: mockResponse,
             status: LaunchListStatus.success,
-            paginationData: PaginationDataEntity(hasNextPage: true, page: 1),
+            paginationData: PaginationDataModel(hasNextPage: true, page: 1),
           ),
           build: buildBloc,
           act: (bloc) => bloc.add(LaunchListLoadMoreRequested()),
@@ -87,12 +86,12 @@ void main() {
             LaunchListState(
               list: mockResponse,
               status: LaunchListStatus.refresh,
-              paginationData: PaginationDataEntity(hasNextPage: true, page: 1),
+              paginationData: PaginationDataModel(hasNextPage: true, page: 1),
             ),
             LaunchListState(
               list: [...mockResponse, ...mockResponse],
               status: LaunchListStatus.success,
-              paginationData: PaginationDataEntity(hasNextPage: true, page: 2),
+              paginationData: PaginationDataModel(hasNextPage: true, page: 2),
             )
           ],
           verify: (_) {
@@ -119,7 +118,7 @@ void main() {
             when(
               () => mockLaunchRepository.fetchListLaunchQuery(payload),
             ).thenAnswer(
-              (invocation) => Future.value(const Left(LaunchResponseEntity(
+              (invocation) => Future.value(const Left(LaunchResponseModel(
                 list: mockResponse,
               ))),
             );
@@ -147,7 +146,7 @@ void main() {
             when(() => mockLaunchRepository.fetchListLaunchQuery(payload))
                 .thenAnswer(
               (invocation) => Future.value(
-                const Left(LaunchResponseEntity(list: mockResponse)),
+                const Left(LaunchResponseModel(list: mockResponse)),
               ),
             );
           },
@@ -159,12 +158,12 @@ void main() {
           expect: () => <LaunchListState>[
             const LaunchListState(
                 status: LaunchListStatus.loading,
-                filter: FilterEntity(
+                filter: FilterModel(
                     filterByDate: false, filterByName: true, filterFlag: 1)),
             const LaunchListState(
               list: mockResponse,
               status: LaunchListStatus.success,
-              filter: FilterEntity(
+              filter: FilterModel(
                   filterByDate: false, filterByName: true, filterFlag: 1),
             )
           ],
@@ -191,10 +190,10 @@ void main() {
               () => mockLaunchRepository.fetchListLaunchQuery(payload),
             ).thenAnswer(
               (invocation) => Future.value(
-                const Left(LaunchResponseEntity(
+                const Left(LaunchResponseModel(
                     list: mockResponse,
                     paginationData:
-                        PaginationDataEntity(hasNextPage: true, page: 1))),
+                        PaginationDataModel(hasNextPage: true, page: 1))),
               ),
             );
           },
@@ -206,7 +205,7 @@ void main() {
             LaunchListState(
               list: mockResponse,
               status: LaunchListStatus.success,
-              paginationData: PaginationDataEntity(hasNextPage: true, page: 1),
+              paginationData: PaginationDataModel(hasNextPage: true, page: 1),
             ),
           ],
         );

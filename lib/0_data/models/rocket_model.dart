@@ -1,15 +1,21 @@
 import 'package:equatable/equatable.dart';
-import 'package:space_x_demo/1_domain/entities/rocket_entity.dart';
 
-class RocketModel extends RocketEntity with EquatableMixin {
-  RocketModel({
-    required super.id,
-    required super.name,
-    required super.images,
-    required super.successRatePct,
-    required super.country,
-    required super.company,
-    required super.description,
+class RocketModel extends Equatable {
+  final String id;
+  final String name;
+  final List<String> images;
+  final int successRatePct;
+  final String country;
+  final String company;
+  final String description;
+  const RocketModel({
+    required this.id,
+    required this.name,
+    required this.images,
+    required this.successRatePct,
+    required this.country,
+    required this.company,
+    required this.description,
   });
 
   factory RocketModel.fromJson(Map<String, dynamic> json) {
@@ -27,4 +33,15 @@ class RocketModel extends RocketEntity with EquatableMixin {
   static List<String> fromListDynamicToString(List<dynamic> list) {
     return list.map((e) => e.toString()).toList();
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        images,
+        successRatePct,
+        country,
+        company,
+        description,
+      ];
 }

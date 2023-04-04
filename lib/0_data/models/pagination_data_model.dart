@@ -1,8 +1,12 @@
 import 'package:equatable/equatable.dart';
-import 'package:space_x_demo/1_domain/entities/pagination_data_entity.dart';
 
-class PaginationDataModel extends PaginationDataEntity with EquatableMixin {
-  PaginationDataModel({required super.hasNextPage, required super.page});
+class PaginationDataModel extends Equatable {
+  final int page;
+  final bool hasNextPage;
+  const PaginationDataModel({
+    required this.hasNextPage,
+    required this.page,
+  });
 
   factory PaginationDataModel.fromJson(Map<String, dynamic> json) {
     return PaginationDataModel(
@@ -10,4 +14,10 @@ class PaginationDataModel extends PaginationDataEntity with EquatableMixin {
       page: json['page'],
     );
   }
+
+  @override
+  List<Object?> get props => [
+        hasNextPage,
+        page,
+      ];
 }
