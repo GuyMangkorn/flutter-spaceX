@@ -6,6 +6,7 @@ import 'package:space_x_demo/2_application/routes/app_router.dart';
 import 'package:space_x_demo/generated/l10n.dart';
 import 'package:space_x_demo/theme.dart';
 import 'package:space_x_demo/injection.dart' as di;
+import 'package:space_x_demo/utils/setup_widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 
 final router = AppRouter();
@@ -21,10 +22,8 @@ class MyHttpOverrides extends HttpOverrides {
 
 @WidgetbookApp.material(
   name: 'Demo SpaceX Application',
-  devices: [
-    Apple.iPhone12,
-    Apple.iPhone13ProMax,
-  ],
+  devices: widgetBookDeviceList,
+  frames: [WidgetbookFrame(name: 'Widgetbook', allowsDevices: true)],
   foldersExpanded: true,
   widgetsExpanded: true,
 )

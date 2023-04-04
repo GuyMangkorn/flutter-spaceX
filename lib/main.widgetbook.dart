@@ -82,26 +82,21 @@ class HotReload extends StatelessWidget {
       ],
       devices: [
         Device(
-          name: 'iPhone 12',
+          name: 'Device',
           resolution: Resolution(
             nativeSize: DeviceSize(
-              height: 2532.0,
-              width: 1170.0,
+              height: 1400.0,
+              width: 700.0,
             ),
-            scaleFactor: 3.0,
+            scaleFactor: 2.0,
           ),
           type: DeviceType.mobile,
         ),
-        Device(
-          name: 'iPhone 13 Pro Max',
-          resolution: Resolution(
-            nativeSize: DeviceSize(
-              height: 2778.0,
-              width: 1284.0,
-            ),
-            scaleFactor: 3.0,
-          ),
-          type: DeviceType.mobile,
+      ],
+      frames: [
+        WidgetbookFrame(
+          name: 'Widgetbook',
+          allowsDevices: true,
         ),
       ],
       categories: [

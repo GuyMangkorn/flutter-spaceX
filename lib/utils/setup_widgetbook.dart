@@ -76,3 +76,13 @@ Widget mainAppBuilder(BuildContext context, Widget child) {
     ),
   );
 }
+
+const widgetBookDeviceList = [
+  Device.mobile(
+    name: 'Device',
+    resolution: Resolution(
+      nativeSize: DeviceSize(width: 700, height: 1400),
+      scaleFactor: 2,
+    ),
+  )
+];
