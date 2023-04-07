@@ -23,7 +23,7 @@ const locales = <Locale>[
 ];
 
 @anno.WidgetbookLocalizationDelegates()
-final delegates = <LocalizationsDelegate<dynamic>>[
+final delegates = <LocalizationsDelegate>[
   S.delegate,
   GlobalMaterialLocalizations.delegate,
   GlobalWidgetsLocalizations.delegate,
