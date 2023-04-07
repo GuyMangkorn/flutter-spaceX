@@ -12,26 +12,22 @@ Widget launchpadSectionUseCase(BuildContext context) {
   final intl = S.of(context);
   return LaunchpadSection(
     launchpad: MockConstants.createLaunchpadEntity(
-        name: context.knobs.text(label: 'Name', initialValue: 'name'),
-        fullName: context.knobs
-            .text(label: 'Full name', initialValue: 'full_name by spaceX'),
-        details: context.knobs.text(
-            label: 'Description',
-            initialValue:
-                'Et eu aliquip pariatur qui sit elit labore aliqua.Ad occaecat sint cupidatat culpa adipisicing Lorem qui qui magna nulla ad.'),
-        image: context.knobs.options(
-          label: 'Image options',
-          options: const [
-            Option(
-              label: 'Without image',
-              value: [],
-            ),
-            Option(
-              label: 'With image',
-              value: [''],
-            )
-          ],
-        )),
+      name: context.knobs.text(label: 'Name', initialValue: 'name'),
+      fullName: context.knobs
+          .text(label: 'Full name', initialValue: 'full_name by spaceX'),
+      details: context.knobs.text(
+        label: 'Description',
+        initialValue:
+            'Et eu aliquip pariatur qui sit elit labore aliqua.Ad occaecat sint cupidatat culpa adipisicing Lorem qui qui magna nulla ad.',
+      ),
+      image: context.knobs.options(
+        label: 'Image options',
+        options: const [
+          [],
+          [''],
+        ],
+      ),
+    ),
     intl: intl,
   );
 }

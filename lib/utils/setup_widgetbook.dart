@@ -84,5 +84,6 @@ const widgetBookDeviceList = [
       nativeSize: DeviceSize(width: 700, height: 1400),
       scaleFactor: 2,
     ),
-  )
+  ),
+  Apple.iPhone13ProMax
 ];

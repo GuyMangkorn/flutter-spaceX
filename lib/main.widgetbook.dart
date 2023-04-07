@@ -65,332 +65,391 @@ class HotReload extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Widgetbook.material(
-      appInfo: AppInfo(
-        name: 'Demo SpaceX Application',
-      ),
-      supportedLocales: locales,
-      localizationsDelegates: delegates,
-      themes: [
-        WidgetbookTheme(
-          name: 'Dark',
-          data: getDarkTheme(),
-        ),
-        WidgetbookTheme(
-          name: 'Light',
-          data: getLightTheme(),
-        ),
-      ],
-      devices: [
-        Device(
-          name: 'Device',
-          resolution: Resolution(
-            nativeSize: DeviceSize(
-              height: 1400.0,
-              width: 700.0,
+      addons: [
+        CustomThemeAddon<ThemeData>(
+          setting: ThemeSetting<ThemeData>(
+            themes: [
+              WidgetbookTheme(
+                name: 'Dark',
+                data: getDarkTheme(),
+              ),
+              WidgetbookTheme(
+                name: 'Light',
+                data: getLightTheme(),
+              ),
+            ],
+            activeTheme: WidgetbookTheme(
+              name: 'Dark',
+              data: getDarkTheme(),
             ),
-            scaleFactor: 2.0,
           ),
-          type: DeviceType.mobile,
         ),
-      ],
-      frames: [
-        WidgetbookFrame(
-          name: 'Widgetbook',
-          allowsDevices: true,
+        LocalizationAddon(
+          setting: LocalizationSetting(
+            locales: locales,
+            activeLocale: locales.first,
+            localizationsDelegates: delegates,
+          ),
         ),
-      ],
-      categories: [
-        WidgetbookCategory(
-          name: 'use cases',
-          folders: [
-            WidgetbookFolder(
-              name: '2_application',
-              widgets: [],
-              folders: [
-                WidgetbookFolder(
-                  name: 'core',
-                  widgets: [],
-                  folders: [
-                    WidgetbookFolder(
-                      name: 'widgets',
-                      widgets: [
-                        WidgetbookComponent(
-                          name: 'MainAppBar',
-                          useCases: [
-                            WidgetbookUseCase(
-                              name: 'Default',
-                              builder: (context) => mainAppBarUseCase(context),
-                            ),
-                          ],
-                          isExpanded: true,
+        FrameAddon(
+          setting: FrameSetting(
+            frames: [
+              NoFrame(),
+              DefaultDeviceFrame(
+                setting: DeviceSetting(
+                  devices: [
+                    Device(
+                      name: 'Device',
+                      resolution: Resolution(
+                        nativeSize: DeviceSize(
+                          height: 1400.0,
+                          width: 700.0,
                         ),
-                        WidgetbookComponent(
-                          name: 'CustomCard',
-                          useCases: [
-                            WidgetbookUseCase(
-                              name: 'Default',
-                              builder: (context) => customCardUseCase(context),
-                            ),
-                          ],
-                          isExpanded: true,
+                        scaleFactor: 2.0,
+                      ),
+                      type: DeviceType.mobile,
+                    ),
+                    Device(
+                      name: 'iPhone 13 Pro Max',
+                      resolution: Resolution(
+                        nativeSize: DeviceSize(
+                          height: 2778.0,
+                          width: 1284.0,
                         ),
-                        WidgetbookComponent(
-                          name: 'ErrorMessage',
-                          useCases: [
-                            WidgetbookUseCase(
-                              name: 'Default',
-                              builder: (context) =>
-                                  errorMessageUseCase(context),
-                            ),
-                            WidgetbookUseCase(
-                              name: 'Long message',
-                              builder: (context) =>
-                                  longErrorMessageUseCase(context),
-                            ),
-                          ],
-                          isExpanded: true,
-                        ),
-                        WidgetbookComponent(
-                          name: 'FadeLoadImage',
-                          useCases: [
-                            WidgetbookUseCase(
-                              name: 'Default',
-                              builder: (context) =>
-                                  fadeLoadImagePlaceholderUseCase(context),
-                            ),
-                          ],
-                          isExpanded: true,
-                        ),
-                      ],
-                      folders: [],
-                      isExpanded: true,
+                        scaleFactor: 3.0,
+                      ),
+                      type: DeviceType.mobile,
                     ),
                   ],
-                  isExpanded: true,
+                  activeDevice: Device(
+                    name: 'Device',
+                    resolution: Resolution(
+                      nativeSize: DeviceSize(
+                        height: 1400.0,
+                        width: 700.0,
+                      ),
+                      scaleFactor: 2.0,
+                    ),
+                    type: DeviceType.mobile,
+                  ),
                 ),
-                WidgetbookFolder(
-                  name: 'pages',
-                  widgets: [],
-                  folders: [
-                    WidgetbookFolder(
-                      name: 'launch_list_page',
-                      widgets: [
-                        WidgetbookComponent(
-                          name: 'LaunchListPage',
-                          useCases: [
-                            WidgetbookUseCase(
-                              name: 'Default',
-                              builder: (context) =>
-                                  launchListPageUseCase(context),
-                            ),
-                          ],
-                          isExpanded: true,
+              ),
+              WidgetbookFrame(
+                setting: DeviceSetting(
+                  devices: [
+                    Device(
+                      name: 'Device',
+                      resolution: Resolution(
+                        nativeSize: DeviceSize(
+                          height: 1400.0,
+                          width: 700.0,
                         ),
-                      ],
-                      folders: [
-                        WidgetbookFolder(
-                          name: 'widgets',
-                          widgets: [
-                            WidgetbookComponent(
-                              name: 'FilterSection',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      filterSectionUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'SkeletonTopList',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      skeletonTopListListUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'SkeletonBottomList',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      skeletonBottomListUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'TopListSection',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      topListSectionUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'CircularLoadMore',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      circularLoadMoreUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'TopHeaderSection',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      topHeaderSectionUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'BottomListSection',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      bottomListSectionUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'BottomListTile',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      bottomListTileUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'TopListItem',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      topListItemUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'BottomSheetFilter',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      bottomSheetFilterUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                          ],
-                          folders: [],
-                          isExpanded: true,
-                        ),
-                      ],
-                      isExpanded: true,
+                        scaleFactor: 2.0,
+                      ),
+                      type: DeviceType.mobile,
                     ),
-                    WidgetbookFolder(
-                      name: 'launch_detail_page',
-                      widgets: [
-                        WidgetbookComponent(
-                          name: 'LaunchDetailPage',
-                          useCases: [
-                            WidgetbookUseCase(
-                              name: 'Default',
-                              builder: (context) =>
-                                  launchDetailPageUseCase(context),
-                            ),
-                          ],
-                          isExpanded: true,
+                    Device(
+                      name: 'iPhone 13 Pro Max',
+                      resolution: Resolution(
+                        nativeSize: DeviceSize(
+                          height: 2778.0,
+                          width: 1284.0,
                         ),
-                      ],
-                      folders: [
-                        WidgetbookFolder(
-                          name: 'widgets',
-                          widgets: [
-                            WidgetbookComponent(
-                              name: 'SkeletonDetailPage',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      skeletonDetailPageUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'CrewsSection',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      crewSectionUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'LaunchpadSection',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      launchpadSectionUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                            WidgetbookComponent(
-                              name: 'RocketSection',
-                              useCases: [
-                                WidgetbookUseCase(
-                                  name: 'Default',
-                                  builder: (context) =>
-                                      rocketSectionUseCase(context),
-                                ),
-                                WidgetbookUseCase(
-                                  name: 'With image',
-                                  builder: (context) =>
-                                      rocketSectionWithImageUseCase(context),
-                                ),
-                              ],
-                              isExpanded: true,
-                            ),
-                          ],
-                          folders: [],
-                          isExpanded: true,
-                        ),
-                      ],
-                      isExpanded: true,
+                        scaleFactor: 3.0,
+                      ),
+                      type: DeviceType.mobile,
                     ),
                   ],
-                  isExpanded: true,
+                  activeDevice: Device(
+                    name: 'Device',
+                    resolution: Resolution(
+                      nativeSize: DeviceSize(
+                        height: 1400.0,
+                        width: 700.0,
+                      ),
+                      scaleFactor: 2.0,
+                    ),
+                    type: DeviceType.mobile,
+                  ),
+                ),
+              ),
+            ],
+            activeFrame: NoFrame(),
+          ),
+        ),
+      ],
+      directories: [
+        WidgetbookFolder(
+          name: '2_application',
+          children: [
+            WidgetbookFolder(
+              name: 'core',
+              children: [
+                WidgetbookFolder(
+                  name: 'widgets',
+                  children: [
+                    WidgetbookComponent(
+                      name: 'MainAppBar',
+                      useCases: [
+                        WidgetbookUseCase(
+                          name: 'Default',
+                          builder: (context) => mainAppBarUseCase(context),
+                        ),
+                      ],
+                      isInitiallyExpanded: true,
+                    ),
+                    WidgetbookComponent(
+                      name: 'CustomCard',
+                      useCases: [
+                        WidgetbookUseCase(
+                          name: 'Default',
+                          builder: (context) => customCardUseCase(context),
+                        ),
+                      ],
+                      isInitiallyExpanded: true,
+                    ),
+                    WidgetbookComponent(
+                      name: 'ErrorMessage',
+                      useCases: [
+                        WidgetbookUseCase(
+                          name: 'Default',
+                          builder: (context) => errorMessageUseCase(context),
+                        ),
+                        WidgetbookUseCase(
+                          name: 'Long message',
+                          builder: (context) =>
+                              longErrorMessageUseCase(context),
+                        ),
+                      ],
+                      isInitiallyExpanded: true,
+                    ),
+                    WidgetbookComponent(
+                      name: 'FadeLoadImage',
+                      useCases: [
+                        WidgetbookUseCase(
+                          name: 'Default',
+                          builder: (context) =>
+                              fadeLoadImagePlaceholderUseCase(context),
+                        ),
+                      ],
+                      isInitiallyExpanded: true,
+                    ),
+                  ],
+                  isInitiallyExpanded: true,
                 ),
               ],
-              isExpanded: true,
+              isInitiallyExpanded: true,
+            ),
+            WidgetbookFolder(
+              name: 'pages',
+              children: [
+                WidgetbookFolder(
+                  name: 'launch_list_page',
+                  children: [
+                    WidgetbookComponent(
+                      name: 'LaunchListPage',
+                      useCases: [
+                        WidgetbookUseCase(
+                          name: 'Default',
+                          builder: (context) => launchListPageUseCase(context),
+                        ),
+                      ],
+                      isInitiallyExpanded: true,
+                    ),
+                    WidgetbookFolder(
+                      name: 'widgets',
+                      children: [
+                        WidgetbookComponent(
+                          name: 'FilterSection',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  filterSectionUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'SkeletonTopList',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  skeletonTopListListUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'SkeletonBottomList',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  skeletonBottomListUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'TopListSection',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  topListSectionUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'CircularLoadMore',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  circularLoadMoreUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'TopHeaderSection',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  topHeaderSectionUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'BottomListSection',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  bottomListSectionUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'BottomListTile',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  bottomListTileUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'TopListItem',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) => topListItemUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'BottomSheetFilter',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  bottomSheetFilterUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                      ],
+                      isInitiallyExpanded: true,
+                    ),
+                  ],
+                  isInitiallyExpanded: true,
+                ),
+                WidgetbookFolder(
+                  name: 'launch_detail_page',
+                  children: [
+                    WidgetbookComponent(
+                      name: 'LaunchDetailPage',
+                      useCases: [
+                        WidgetbookUseCase(
+                          name: 'Default',
+                          builder: (context) =>
+                              launchDetailPageUseCase(context),
+                        ),
+                      ],
+                      isInitiallyExpanded: true,
+                    ),
+                    WidgetbookFolder(
+                      name: 'widgets',
+                      children: [
+                        WidgetbookComponent(
+                          name: 'SkeletonDetailPage',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  skeletonDetailPageUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'CrewsSection',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) => crewSectionUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'LaunchpadSection',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  launchpadSectionUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'RocketSection',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  rocketSectionUseCase(context),
+                            ),
+                            WidgetbookUseCase(
+                              name: 'With image',
+                              builder: (context) =>
+                                  rocketSectionWithImageUseCase(context),
+                            ),
+                          ],
+                          isInitiallyExpanded: true,
+                        ),
+                      ],
+                      isInitiallyExpanded: true,
+                    ),
+                  ],
+                  isInitiallyExpanded: true,
+                ),
+              ],
+              isInitiallyExpanded: true,
             ),
           ],
-          widgets: [],
+          isInitiallyExpanded: true,
         ),
       ],
       appBuilder: mainAppBuilder,

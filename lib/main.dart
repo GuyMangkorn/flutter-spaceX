@@ -21,9 +21,7 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 @WidgetbookApp.material(
-  name: 'Demo SpaceX Application',
   devices: widgetBookDeviceList,
-  frames: [WidgetbookFrame(name: 'Widgetbook', allowsDevices: true)],
   foldersExpanded: true,
   widgetsExpanded: true,
 )

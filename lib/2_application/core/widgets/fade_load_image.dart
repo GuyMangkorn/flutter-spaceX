@@ -13,8 +13,8 @@ Widget fadeLoadImagePlaceholderUseCase(BuildContext context) {
       image: context.knobs.options(
         label: 'Image provider',
         options: const [
-          Option(label: 'Placeholder', value: ''),
-          Option(label: 'Network image', value: MockConstants.mockNetworkURL)
+          '',
+          MockConstants.mockNetworkURL,
         ],
       ),
       width: context.knobs.slider(
